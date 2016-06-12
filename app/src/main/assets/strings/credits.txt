@@ -1,0 +1,10 @@
+# String file
+Welcome to World Cup Manager where you 
+can simulate the football tournament 
+for your own entertainment. I hope you 
+enjoy the application and you are more 
+than welcome to email me at 
+wi11berto@yahoo.co.uk if there are any 
+bugs or new features that you would 
+like to add. Have fun. The Team
+# End
