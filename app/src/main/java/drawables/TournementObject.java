@@ -10,6 +10,15 @@ import framework.core.*;
 import java.util.ArrayList;
 
 public class TournementObject implements IRenderable {
+	private class TeamItem {
+		public ClickEvent listener;
+		public Button button;
+		public Image image;
+
+		public KnockOutEvent event;
+		public Team team;
+	}
+
 	private ArrayList<TeamItem> roundOfSixteen = new ArrayList<TeamItem>();
 	private ArrayList<TeamItem> quaterfinals = new ArrayList<TeamItem>();
 	private ArrayList<TeamItem> semifinals = new ArrayList<TeamItem>();
@@ -554,8 +563,7 @@ public class TournementObject implements IRenderable {
 					teamLines[i].setLineWidth(5.0f);
 					
 					float value = 0.0f;
-					switch(z)
-					{
+					switch(z) {
 						case 0: value = 150.0f; break;
 						case 4: value = 300.0f; break;
 						default: value = 0.0f; break;
@@ -585,14 +593,12 @@ public class TournementObject implements IRenderable {
 		}
 
 		public void add(ArrayList<Object> objects) {
-			// iterate through the vector and add the lines to it
 			for(int i = 0; i < teamLines.length; i++) {
 				objects.add(teamLines[i]);
 			}
 		}
 
 		public void update() {
-			// update all lines
 			for(int i = 0; i < 7; i++) {
 				teamLines[i].update();
 			}
@@ -604,14 +610,5 @@ public class TournementObject implements IRenderable {
 				teamLines[i].render();
 			}
 		}
-	}
-
-	private class TeamItem {
-		public ClickEvent listener;
-		public Button button;
-		public Image image;
-		
-		public KnockOutEvent event;
-		public Team team;
 	}
 }

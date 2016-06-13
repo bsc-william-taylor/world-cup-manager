@@ -6,13 +6,9 @@ import java.util.ArrayList;
 import framework.core.*;
 
 public class GroupObject implements IRenderable {
+	private static TeamObject[] teams  = new TeamObject[4];
 	private static final Integer HEIGHT = 250;
 	private static final Integer WIDTH = 600;
-	private static TeamObject[] teams;
-
-	static {
-		teams = new TeamObject[4];
-	}
 
 	private TeamObject teamThree;
 	private TeamObject teamFour;
@@ -164,12 +160,11 @@ public class GroupObject implements IRenderable {
 	}
 
 	public ArrayList<Object> getLabels() {
-		ArrayList<Object> objects = new ArrayList<Object>();
+		ArrayList<Object> objects = new ArrayList<Object>(4);
 		addStrings(objects, teamOne);
 		addStrings(objects, teamTwo);
 		addStrings(objects, teamThree);
 		addStrings(objects, teamFour);
-
 		return objects;
 	}
 

@@ -2,16 +2,14 @@ package drawables;
 
 import android.view.MotionEvent;
 import framework.core.*;
-
 import java.util.*;
-
 import objects.Globals;
 
 public class HelpObject implements IRenderable {
-	private Button dontShowButton;
-	private Button gotchaButton;
 	private ClickEvent gotchaClick;
 	private ClickEvent showClick;
+	private Button dontShowButton;
+	private Button gotchaButton;
 	private Image helpBackground;
 	private Boolean enabled;
 

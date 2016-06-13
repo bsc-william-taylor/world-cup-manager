@@ -11,10 +11,9 @@ public class MatchesObject implements IRenderable {
 	private final static Integer X_MARGIN = 30;
 
 	private ClickEvent[] events = new ClickEvent[NUMBER_OF_TEAMS];
+	private MatchEvent[] event = new MatchEvent[EVENT_COUNT];
 	private Button[] buttons = new Button[NUMBER_OF_TEAMS];
 	private Image[] flags = new Image[NUMBER_OF_TEAMS];
-
-	private MatchEvent[] event = new MatchEvent[EVENT_COUNT];
 	private String[] names;
 	
 	private ClickEvent completedEvent;

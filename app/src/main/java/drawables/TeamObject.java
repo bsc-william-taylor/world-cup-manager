@@ -96,7 +96,6 @@ public class TeamObject implements IRenderable {
 	public void translateLabelScores(float f) {
 		teamScore.translate(teamScore.getPosition().getX(), f);
 		name.translate(name.getPosition().getX(), f);
-	
 	}
 
 	public String getName() {
