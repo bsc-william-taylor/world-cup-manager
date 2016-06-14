@@ -11,6 +11,18 @@ import events.*;
 import scenes.*;
 
 public class MainActivity extends Activity implements IGameActivity {
+    public static Boolean TouchSounds = true;
+    public static class Scenes {
+        public static final int ENTRY_SCENE = 0;
+        public static final int MAIN_MENU = 1;
+        public static final int CREDITS = 2;
+        public static final int ABOUT = 3;
+        public static final int EDIT = 4;
+        public static final int GROUP = 5;
+        public static final int KNOCK_OUT = 6;
+        public static final int MATCHES = 7;
+    }
+
     private GameObject game;
     private TouchEvent effect;
 
@@ -64,19 +76,6 @@ public class MainActivity extends Activity implements IGameActivity {
         }
 
         return false;
-    }
-
-    public static Boolean TouchSounds = true;
-
-    public static class Scenes {
-        public static final int ENTRY_SCENE = 0;
-        public static final int MAIN_MENU = 1;
-        public static final int CREDITS = 2;
-        public static final int ABOUT = 3;
-        public static final int EDIT = 4;
-        public static final int GROUP = 5;
-        public static final int KNOCK_OUT = 6;
-        public static final int MATCHES = 7;
     }
 
     @Override

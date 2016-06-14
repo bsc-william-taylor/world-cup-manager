@@ -9,6 +9,10 @@ public class MuteEvent implements IEvent {
 		MuteEvent.button = button;
 	}
 
+	public MuteEvent() {
+		this(null);
+	}
+
 	@Override
 	public void onActivate(Object data) {
 		if(AudioClip.masterVolume > 0.0f) {

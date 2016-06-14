@@ -3,26 +3,26 @@ package scenes;
 /**
  * Copyright (c) 2014 - William Taylor <wi11berto@yahoo.co.uk>
  *
- *	This software is provided 'as-is', without any express or implied warranty. 
- *  In no event will the authors be held liable for any damages arising from 
- *  the use of this software. Permission is granted to anyone to use this 
- *  software for any purpose, including commercial applications, and to 
- *  alter it and redistribute it freely, subject to the following 
+ *	This software is provided 'as-is', without any express or implied warranty.
+ *  In no event will the authors be held liable for any damages arising from
+ *  the use of this software. Permission is granted to anyone to use this
+ *  software for any purpose, including commercial applications, and to
+ *  alter it and redistribute it freely, subject to the following
  *  restrictions:
  *
- *	1. The origin of this software must not be misrepresented; 
- *     you must not claim that you wrote the original software. 
- *	   If you use this software in a product, an acknowledgment 
- *     in the product documentation would be appreciated 
+ *	1. The origin of this software must not be misrepresented;
+ *     you must not claim that you wrote the original software.
+ *	   If you use this software in a product, an acknowledgment
+ *     in the product documentation would be appreciated
  *     but is not required.
  *
- *  2. Altered source versions must be plainly marked as such, 
- *     and must not be misrepresented as being the original 
+ *  2. Altered source versions must be plainly marked as such,
+ *     and must not be misrepresented as being the original
  *     software.
- *  
- *  3. This notice may not be removed or altered 
+ *
+ *  3. This notice may not be removed or altered
  *     from any source distribution.
- *     
+ *
  */
 import android.view.MotionEvent;
 import activity.MainActivity;
@@ -32,11 +32,11 @@ import objects.Globals;
 import framework.core.*;
 
 /**
- * The splash screen for the application 
- * which loads all the assets for the 
+ * The splash screen for the application
+ * which loads all the assets for the
  * app as well as display a image
  * while the user waits
- * 
+ *
  * @version : final version for release
  * @author : William Taylor
  */
@@ -44,13 +44,9 @@ public class SplashScene extends Scene implements ISceneLoader {
 	/** Some settings for the scene */
 	private static final Float ALPHA_INCREMENT = 0.2F;
 	private static final Float ALPHA_END = 1.13F;
-	/** The alpha value for the background */
 	private Float alpha = 0.0f;
-	/** The text label that shows the version number of the app */
 	private Label version;
-	/** The hepder that shows the apps names*/
 	private Label header;
-	/** the background for the scene */
 	private Image background;
 
 	/**
@@ -59,8 +55,8 @@ public class SplashScene extends Scene implements ISceneLoader {
 	@Override
 	public void onCreate(IFactory factory) {
 		Globals.get();
-		
-		// Initialise the header buttons 
+
+		// Initialise the header buttons
 		Button LevelButton1 = new Button();
 		Button LevelButton2 = new Button();
 		

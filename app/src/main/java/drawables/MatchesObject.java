@@ -64,8 +64,8 @@ public class MatchesObject implements IRenderable {
         completeButton.setText("Auto-Complete", 890, group.getY() - 10, 200, 50);
         completeButton.setTextColour(1f, 1f, 0f, 1f);
 
-        completedEvent = new ClickEvent(completeButton);
-        completedEvent.eventType(new AutoCompleteEvent(event));
+        //completedEvent = new ClickEvent(completeButton);
+        //completedEvent.eventType(new AutoCompleteEvent(event));
 
         // finish loading all the flags and button
         for(int i = 6; i < 12; i++) {
@@ -175,7 +175,7 @@ public class MatchesObject implements IRenderable {
      */
     public void onTouch(MotionEvent e, float x, float y) {
         if(e.getAction() == MotionEvent.ACTION_DOWN) {
-            completedEvent.OnTouch(e, x, y);
+            //completedEvent.OnTouch(e, x, y);
             for(int i = 0; i < events.length; i++) {
                 events[i].OnTouch(e, x, y);
             }
@@ -195,8 +195,8 @@ public class MatchesObject implements IRenderable {
             flags[i].update();
         }
 
-        completeButton.translate(0, y);
-        completeButton.update();
+        //completeButton.translate(0, y);
+        //completeButton.update();
     }
 
 
@@ -253,7 +253,7 @@ public class MatchesObject implements IRenderable {
             flags[i].render();
         }
 
-        completeButton.render();
+        //completeButton.render();
     }
 
     public Object getCompleteButton() {
