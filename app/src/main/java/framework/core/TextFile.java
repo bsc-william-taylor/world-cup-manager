@@ -6,7 +6,7 @@ public class TextFile {
 	private ArrayList<String> Lines = new ArrayList<String>();
 	
 	public TextFile(String filename) {
-		Scanner scanner = ResourceManager.Get().GetFile(filename);
+		Scanner scanner = ResourceManager.get().getFile(filename);
 		String line = null;
 		
 		while(true) {

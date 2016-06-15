@@ -70,7 +70,7 @@ public class Font {
         }
 
         if(!duplicateFound) {
-            stream = ResourceManager.Get().GetResource(xmlFile);
+            stream = ResourceManager.get().getResource(xmlFile);
 
             xmlParser = new XmlReader();
             doc = xmlParser.getDocument(stream);

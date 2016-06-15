@@ -208,7 +208,7 @@ public class MatchesObject implements IRenderable {
      */
     public void onLongPress(MotionEvent e, int x, int y) {
         if(e.getAction() == MotionEvent.ACTION_DOWN) {
-            completedEvent.onLongPress(e, x, y);
+            //completedEvent.onLongPress(e, x, y);
             for(int i = 0; i < events.length; i++) {
                 events[i].onLongPress(e, x, y);
             }
@@ -221,7 +221,7 @@ public class MatchesObject implements IRenderable {
      */
     public void onEnter() {
         EventManager.get().addListeners(events);
-        EventManager.get().addListener(completedEvent);
+        //EventManager.get().addListener(completedEvent);
     }
 
     /**
@@ -229,14 +229,14 @@ public class MatchesObject implements IRenderable {
      */
     public void onExit() {
         EventManager eventsMgr = EventManager.get();
-        eventsMgr.removeListener(completedEvent);
+        //eventsMgr.removeListener(completedEvent);
         for(int i = 0; i < events.length; i++) {
             eventsMgr.removeListener(events[i]);
         }
     }
 
     /**
-     * Get functions for this class
+     * get functions for this class
      */
     public Button[] getButtons() {
         return this.buttons;

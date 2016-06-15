@@ -76,7 +76,7 @@ public class OpenglProgram {
 	 * @return
 	 */
 	private String loadShaderSource(String filename) {
-		InputStream inputStream = ResourceManager.Get().GetResource(filename);
+		InputStream inputStream = ResourceManager.get().getResource(filename);
 		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 

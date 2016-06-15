@@ -60,10 +60,10 @@ public class OpenglTextureManager {
 		Integer duplicate = checkForDuplicate(name);
 		
 		if(duplicate == -1) {
-			ResourceManager resourceManager = ResourceManager.Get();
+			ResourceManager resourceManager = ResourceManager.get();
 			OpenglTextureUnit sprite = new OpenglTextureUnit();
 			
-			Bitmap spriteData = BitmapFactory.decodeStream(resourceManager.GetResource(filename));
+			Bitmap spriteData = BitmapFactory.decodeStream(resourceManager.getResource(filename));
 			sprite.textureGL_ID = new int[1];
 			sprite.textureName = name;
 			sprite.height = spriteData.getHeight();

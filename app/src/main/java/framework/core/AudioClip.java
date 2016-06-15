@@ -11,7 +11,7 @@ public class AudioClip {
 	private Boolean alwaysOn;
 
 	public AudioClip(Integer rawID) {
-		player = MediaPlayer.create(ResourceManager.Get().GetContext(), rawID);
+		player = MediaPlayer.create(ResourceManager.get().getContext(), rawID);
 		rightVolume = 1.0f;
 		leftVolume = 1.0f;
 		alwaysOn = false;

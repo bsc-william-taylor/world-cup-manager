@@ -40,11 +40,9 @@ public class OpenglRenderer implements Renderer {
 		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 		
 		eventManager.update();
-		
-		sceneManager.change();
-		sceneManager.update(renderQueue);		
-		
+		sceneManager.update(renderQueue);
 		renderQueue.renderObjects();
+		sceneManager.change();
 	}
 	
 	/**

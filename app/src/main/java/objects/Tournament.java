@@ -86,7 +86,7 @@ public class Tournament {
 	public Team getWinner() {
 		Team winner = teams[0];
 			
-		// Get team with most points
+		// get team with most points
 		for(int i = 0; i < 4; i++) {
 			if(teams[i].Points > winner.Points) {
 				winner = teams[i];

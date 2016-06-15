@@ -104,7 +104,7 @@ public class Globals {
 	}
 
 	public void changeMatchResult(Integer s1, TeamObject t1, Integer s2, TeamObject t2) {
-		// Get the vector size
+		// get the vector size
 		Integer vecSize = matchResult.size();
 		// iterate through the vector looking for the match result
 		for(int i = 0; i < vecSize; i++) {

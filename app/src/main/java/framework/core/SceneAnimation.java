@@ -1,89 +1,29 @@
-/**
- * Copyright (c) 2014 - William Taylor <wi11berto@yahoo.co.uk>
- *
- *	This software is provided 'as-is', without any express or implied warranty.
- *  In no event will the authors be held liable for any damages arising from
- *  the use of this software. Permission is granted to anyone to use this
- *  software for any purpose, including commercial applications, and to
- *  alter it and redistribute it freely, subject to the following
- *  restrictions:
- *
- *	1. The origin of this software must not be misrepresented;
- *     you must not claim that you wrote the original software.
- *	   If you use this software in a product, an acknowledgment
- *     in the product documentation would be appreciated
- *     but is not required.
- *
- *  2. Altered source versions must be plainly marked as such,
- *     and must not be misrepresented as being the original
- *     software.
- *
- *  3. This notice may not be removed or altered
- *     from any source distribution.
- *
- */
 package framework.core;
 
 import java.util.*;
 
-/**
- * 
- * @author William
- *
- */
 public class SceneAnimation {
-	/** **/
-	private ArrayList<Button> buttons = new ArrayList<Button>();
-	/** **/
-	private ArrayList<Image> images = new ArrayList<Image>();
-	/** **/
-	private ArrayList<Label> labels = new ArrayList<Label>();
-	/** **/
 	private ArrayList<OpenglLine> lines  = new ArrayList<OpenglLine>();
-	/** **/
+	private ArrayList<Button> buttons = new ArrayList<Button>();
+	private ArrayList<Image> images = new ArrayList<Image>();
+	private ArrayList<Label> labels = new ArrayList<Label>();
 	private Integer stateID = 0;
-	/** **/
 	private Vector2 velocity;
-	/** **/
 	private Boolean start;
-	
-	/**
-	 * 
-	 */
+
 	public SceneAnimation() {
 		start = false;
 	}
-	
-	/**
-	 * 
-	 * @param i
-	 */
-	public SceneAnimation(int i) {
-		stateID = i;
-		start = false;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
+
 	public Boolean isRunning() {
 		return start;
 	}
-	
-	/**
-	 * 
-	 * @param i
-	 */
+
 	public void setState(int i) {
 		stateID = i;
 		start = false;
 	}
-	
-	/**
-	 * 
-	 * @param sprites
-	 */
+
 	public void setupAnimation(ArrayList<Object> sprites) {
 		for(Object obj : sprites) {
 			if(obj instanceof Image) {
@@ -109,18 +49,11 @@ public class SceneAnimation {
 			}
 		} 
 	}
-	
-	/**
-	 * 
-	 * @param vector
-	 */
+
 	public void setVelocity(Vector2 vector) {
 		this.velocity = vector;
 	}
-	
-	/**
-	 * 
-	 */
+
 	public void update() {
 		if(start) {
 			Integer elementsToMove = 0;
@@ -221,14 +154,12 @@ public class SceneAnimation {
 			}
 		}
 	}
-	
-	/**
-	 * 
-	 */
+
 	public void beginAnimation() {
+        start = true;
 		GameObject.disableInput();
 		if(velocity == null) {
 			velocity = new Vector2(10, 0);
-		} start = true;
+		}
 	}
 }

@@ -59,7 +59,7 @@ public class GameObject extends Application implements OnGestureListener {
 	public void start(IGameActivity activity) {
 		detector = new GestureDetectorCompat(getApplicationContext(), this);
 
-		ResourceManager.Get().Initialise(getApplicationContext());
+		ResourceManager.get().initialise(getApplicationContext());
 		DisplayMetrics Window = new DisplayMetrics();
 		landscape = true;
 		disable = false;

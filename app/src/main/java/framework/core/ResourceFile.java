@@ -7,43 +7,21 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.io.*;
 
-/**
- * This is a resource manager that should be used
- * to grab files in the assets folder.
- * 
- * @version 08/02/2014
- * @author William Taylor
- */
 public class ResourceFile {
-	/** A buffered reader for reading a file */
 	private BufferedReader in;
-	/** Just the filename */
 	private String Filename;
-	
-	/**
-	 * A basic constructor that just tell where to read the file.
-	 * @param filename The location of the file.
-	 */
+
 	public ResourceFile(String filename) {
 		Filename = filename;
 	}
-	
-	/**
-	 * Allows the user to make sure the file exists.
-	 * @return a boolean to say if it does exist.
-	 */
+
 	public boolean Exists() {
-		Context c = ResourceManager.Get().GetContext();
+		Context c = ResourceManager.get().getContext();
 		return(new File(c.getFilesDir(), Filename).exists());
 	}
-	
-	/**
-	 * Reads the file and packs each line in a vector.
-	 * 
-	 * @return returns a vector where each element is a line/
-	 */
+
 	public ArrayList<String> ReadFile() {
-		Scanner File = ResourceManager.Get().GetFile(Filename);
+		Scanner File = ResourceManager.get().getFile(Filename);
 		ArrayList<String> lines = new ArrayList<String>();	
 		while(true) {
 			String line = null;
@@ -66,14 +44,10 @@ public class ResourceFile {
 			}
 		} return lines;
 	}
-	
-	/**
-	 * Writes each object in the objects array the to the file.
-	 * @param objects an array containing all the data.
-	 */
+
 	public void Write(ArrayList<String> objects) {
 		// Grab the games context
-		Context c = ResourceManager.Get().GetContext();
+		Context c = ResourceManager.get().getContext();
 		try {		
 			BufferedWriter out = new BufferedWriter(new FileWriter(new File(c.getFilesDir(), Filename)));
 			for(String o : objects) {
@@ -86,18 +60,16 @@ public class ResourceFile {
 			System.out.println(e.toString());
 		}
 	}
-	
-	/** Just prepates the file to read	 */
+
 	public void PrepareToRead() {
-		Context c = ResourceManager.Get().GetContext();
+		Context c = ResourceManager.get().getContext();
 		try {
 			in = new BufferedReader(new FileReader(new File(c.getFilesDir(), Filename)));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	/** Closes the file after you have pushed the data to the file.	 */
+
 	public void Close() {
 		try {
 			in.close();
@@ -105,11 +77,7 @@ public class ResourceFile {
 			e.printStackTrace();
 		}
 	}
-	
-	/**
-	 * Returns the next line in the file.
-	 * @return a string containing the file.
-	 */
+
 	public String ReadLine() {		
 		try {
 			return in.readLine();

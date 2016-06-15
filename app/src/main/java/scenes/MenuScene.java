@@ -76,7 +76,7 @@ public class MenuScene extends Scene {
 	 */
 	@Override
 	public void onCreate(IFactory factory) {
-		/** Get the font needed for the buttons */
+		/** get the font needed for the buttons */
 		Font font = Font.get("Tiny");
 		
 		// and get the headerButtons & background from the asset factory

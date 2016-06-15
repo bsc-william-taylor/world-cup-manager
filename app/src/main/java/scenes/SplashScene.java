@@ -56,7 +56,7 @@ public class SplashScene extends Scene implements ISceneLoader {
 	public void onCreate(IFactory factory) {
 		Globals.get();
 
-		// Initialise the header buttons
+		// initialise the header buttons
 		Button LevelButton1 = new Button();
 		Button LevelButton2 = new Button();
 		
@@ -187,7 +187,7 @@ public class SplashScene extends Scene implements ISceneLoader {
 
 		@Override
 		public void onActivate(Object data) {
-			// Get the scene manager and event manager
+			// get the scene manager and event manager
 			SceneManager scenes = SceneManager.get();
 			EventManager events = EventManager.get();
 			
