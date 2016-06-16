@@ -2,7 +2,6 @@ package framework.core;
 
 import android.media.MediaPlayer;
 
-
 public class AudioClip {
 	public static Float masterVolume = 1f;
 	private MediaPlayer player;

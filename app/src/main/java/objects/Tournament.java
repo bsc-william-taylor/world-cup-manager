@@ -72,7 +72,7 @@ public class Tournament {
 	}
 	
 	/**
-	 * Reset function resets all the teams
+	 * reset function resets all the teams
 	 */
 	public void Reset() {
 		for(Team team : teams) {

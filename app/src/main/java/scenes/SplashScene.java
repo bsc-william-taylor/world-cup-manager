@@ -102,7 +102,7 @@ public class SplashScene extends Scene implements ISceneLoader {
 		EventManager.get().addListener(LeftButton);
 	}
 	
-	/** Update all objects in the sdcene */
+	/** update all objects in the sdcene */
 	@Override
 	public void onUpdate() {
 		// set the colour of all the objects in the scene

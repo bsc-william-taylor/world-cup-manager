@@ -187,7 +187,7 @@ public class EditScene extends Scene implements IEvent {
 	}
 	
 	/**
-	 * Update function that does what it says it does
+	 * update function that does what it says it does
 	 */
 	@Override
 	public void onUpdate() {

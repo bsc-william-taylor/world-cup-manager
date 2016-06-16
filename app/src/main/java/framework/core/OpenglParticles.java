@@ -3,42 +3,34 @@ package framework.core;
 import java.util.Random;
 import static android.opengl.GLES20.*;
 
-/**
- * 
- * @author B0023_000
- *
- */
 public class OpenglParticles {
-	/**	*/
 	private final String VS = "shaders/fire_vs.glsl";
 	private final String FS = "shaders/fire_fs.glsl";
-	
-	/**	*/
+    private static int TranslateID;
+    private static int PositionID;
+    private static int DestinationID;
+    private static int DirectionID;
+    private static int ProjectionID;
+    private static int MatrixID;
+    private static int ColourID;
+    private static int TimeID;
+
 	private OpenglBuffer buffer = new OpenglBuffer();
-	private Matrix matrix = new Matrix();
-	
 	private OpenglProgram program;
+	private Matrix matrix = new Matrix();
 	private Integer number;
 	private Float time;
-	
-	/**	*/
+
 	private Vector2 translation = new Vector2();
 	private Vector2 destination = new Vector2();
 	private Vector2 position = new Vector2();
-	
-	/** */
+
 	public OpenglParticles() {
 		program = OpenglShaderManager.get().getShader(VS, FS);
 		number = 0;
 		time = 10f;
 	}
-	
-	/**
-	 * 
-	 * @param number
-	 * @param x
-	 * @param y
-	 */
+
 	public void initialiseParticles(int number, float x, float y) {
 		float[] pos = new float[2 + (number * 2)];
 		pos[0] = x;	
@@ -59,38 +51,22 @@ public class OpenglParticles {
 		position.set(x, y);
 		buffer.insert(pos);
 	}
-	
-	/**	*/
-	public void SetPosition(float x, float y) {
+
+	public void setPosition(float x, float y) {
 		translation.set(x, y);
 	}
-	
-	/**	*/
-	public void Reset() {
+
+	public void reset() {
 		time = 0.0f;
 	}
 
-	/**	*/
-	public void Update() {
+	public void update() {
 		time += 0.02f;
 	}
-	
-	/**	*/
-	public void Destination(float x, float y) {
+
+	public void setDestinations(float x, float y) {
 		destination.set(x, y);
 	}
-	
-	
-	static int DestinationID;
-	static int DirectionID;
-	static int ProjectionID;
-	static int MatrixID;
-	static int ColourID;
-	static int TimeID;
-	
-	static int TranslateID;
-	static int PositionID;
-	
 	
 	public void startRender() {
 		program.startProgram();
@@ -112,8 +88,6 @@ public class OpenglParticles {
 	}
 	
 	public void render() {
-		
-		
 		if(time < 10.0f) {
 			buffer.bindBuffer();			
 			glVertexAttribPointer(TranslateID, 2, GL_FLOAT, false, 8, 8);

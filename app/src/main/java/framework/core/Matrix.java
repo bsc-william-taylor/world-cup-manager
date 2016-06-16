@@ -18,7 +18,6 @@ public class Matrix {
 		ortho(0, 0, width, height);
 		pushIdentity();
 	}
-	
 
 	public void rotate(float angle, int centreX, int centreY) {
 		translate(centreX, centreY);

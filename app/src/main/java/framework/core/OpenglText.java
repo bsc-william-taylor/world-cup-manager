@@ -4,65 +4,62 @@ import static android.opengl.GLES20.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
 import java.util.ArrayList;
 
 
 public class OpenglText implements IRenderable {
-	private final String vs = "shaders/text_vs.glsl";
-	private final String fs = "shaders/text_fs.glsl";
-	private Integer TextLength;
-	private Integer TextHeight;
-	
-	private float[] colour = new float[4];
-		
-	private OpenglBuffer PositionBuffer = new OpenglBuffer();
-	private OpenglProgram Shader;
-	
-	private Vector2 InitialTranslate = new Vector2(0, 0);
-	private Vector2 Translate = new Vector2();
-	
-	private framework.core.Font Font;
-	private Matrix matrix = new Matrix();
-	private OpenglTextureUnit Sheet;
-	private Boolean Loaded = false;
-	private Integer Count;
-	private String string = "";
-	
+	private static final String SHADERS_TEXT_VS_GLSL = "shaders/text_vs.glsl";
+	private static final String SHADERS_TEXT_FS_GLSL = "shaders/text_fs.glsl";
+    private static int PROJECTION_ID = 0;
+    private static int POSITION_ID = 0;
+    private static int MATRIX_ID = 0;
+    private static int COLOUR_ID = 0;
+
+    private float[] colour = new float[4];
+    private Vector2 initialTranslate = new Vector2(0, 0);
+    private Vector2 translate = new Vector2();
+    private Matrix matrix = new Matrix();
+    private Boolean loaded = false;
+    private String string = "";
+
+	private OpenglBuffer positionBuffer = new OpenglBuffer();
+    private OpenglTextureUnit sheet;
+    private OpenglProgram shader;
+    private Integer textLength;
+    private Integer textHeight;
+    private Integer count;
+    private Font font;
+
 	public OpenglText(framework.core.Font labelEngine) {
-		Shader = new OpenglProgram();
-		Shader.PushShaders(vs, fs);
-		
+		shader = new OpenglProgram();
+		shader.pushShaders(SHADERS_TEXT_VS_GLSL, SHADERS_TEXT_FS_GLSL);
 		matrix.pushIdentity();
-		setColour(1, 1, 1, 1);
-		Font = labelEngine;		
+		font = labelEngine;
+
+        setColour(1, 1, 1, 1);
 	}
 	
 	public void setInitialPosition(float x, float y) {
-		this.InitialTranslate.set(x, y);
-		this.Translate.set(x, y);
+		this.initialTranslate.set(x, y);
+		this.translate.set(x, y);
 	}
 	
 	public String getString() {
 		return string;
 	}
-	
-	/**
-	 * 
-	 * @param string
-	 * @param x
-	 * @param y
-	 */
+
 	public void load(String string, int x, int y) {
-		Document document = Font.getDocument();
-		XmlReader parser = Font.getParser();
+		Document document = font.getDocument();
+		XmlReader parser = font.getParser();
 		this.string = string;
 	
 		NodeList nodeList = document.getElementsByTagName("character");
 		char[] letters = string.toCharArray();
 		
-		Count = letters.length * 6;
-		TextHeight = 0;
-		TextLength = 0;
+		count = letters.length * 6;
+		textHeight = 0;
+		textLength = 0;
 		
 		float[] data = new float[24 * letters.length];
 		
@@ -70,7 +67,7 @@ public class OpenglText implements IRenderable {
 		int tex_y = 0;
 		int b = 0;
 		
-		Sheet = OpenglTextureManager.get().getSprite(Font.getTextureFilename());
+		sheet = OpenglTextureManager.get().getSprite(font.getTextureFilename());
 		  
 		for(int i = 0; i < letters.length; i++) {
 			int Value = (int)letters[i];
@@ -81,10 +78,10 @@ public class OpenglText implements IRenderable {
 		    int h2 = Integer.parseInt(parser.getValue(e, "height"));
 		    int w2 = Integer.parseInt(parser.getValue(e, "width"));
 		    
-		    float realX = (float)x2/Sheet.width;
-		    float realY = (float)y2/Sheet.height;
-		    float realW = (float)(x2 + w2)/Sheet.width;
-		    float realH = (float)(y2 + h2)/Sheet.height;
+		    float realX = (float)x2/ sheet.width;
+		    float realY = (float)y2/ sheet.height;
+		    float realW = (float)(x2 + w2)/ sheet.width;
+		    float realH = (float)(y2 + h2)/ sheet.height;
 		    
 		    data[b + 0] = tex_x;	 	data[b + 2] = realX;
 		    data[b + 1] = tex_y;	 	data[b + 3] = realH;
@@ -100,40 +97,40 @@ public class OpenglText implements IRenderable {
 		    data[b + 20] = tex_x;		data[b + 22] = realX;
 		    data[b + 21] = tex_y+h2;	data[b + 23] = realY;
 		    
-		    TextLength = (int)data[b + 12];
-		    TextHeight = h2;
+		    textLength = (int)data[b + 12];
+		    textHeight = h2;
 		    
 		    tex_x += w2;		    
 		    b += 24;
 		}
 		
-		if(Loaded) {
-			PositionBuffer.reinsert(data);
+		if(loaded) {
+			positionBuffer.reinsert(data);
 		} else {
-			PositionBuffer.insert(data);
-			Loaded = true;
+			positionBuffer.insert(data);
+			loaded = true;
 		}
 		
-		InitialTranslate.set(x, y);
-	    Translate.set(x, y); 
+		initialTranslate.set(x, y);
+	    translate.set(x, y);
 	}
 	
 	public void load(String string, int x, int y, ArrayList<Vector2> positions) {
-		Document document = Font.getDocument();
-		XmlReader parser = Font.getParser();
+		Document document = font.getDocument();
+		XmlReader parser = font.getParser();
 	
 		NodeList nodeList = document.getElementsByTagName("character");
 		char[] letters = string.toCharArray();
 		
-		Count = letters.length * 6;
-		TextHeight = 0;
-		TextLength = 0;
+		count = letters.length * 6;
+		textHeight = 0;
+		textLength = 0;
 		
 		float[] data = new float[24 * letters.length];
 		
 		int b = 0;
 		
-		Sheet = OpenglTextureManager.get().getSprite(Font.getTextureFilename());
+		sheet = OpenglTextureManager.get().getSprite(font.getTextureFilename());
 		  
 		for(int i = 0; i < letters.length; i++) {
 			int Value = (int)letters[i];
@@ -144,10 +141,10 @@ public class OpenglText implements IRenderable {
 		    int h2 = Integer.parseInt(parser.getValue(e, "height"));
 		    int w2 = Integer.parseInt(parser.getValue(e, "width"));
 		    
-		    float realX = (float)x2/Sheet.width;
-		    float realY = (float)y2/Sheet.height;
-		    float realW = (float)(x2 + w2)/Sheet.height;
-		    float realH = (float)(y2 + h2)/Sheet.height;
+		    float realX = (float)x2/ sheet.width;
+		    float realY = (float)y2/ sheet.height;
+		    float realW = (float)(x2 + w2)/ sheet.height;
+		    float realH = (float)(y2 + h2)/ sheet.height;
 		    
 		    Vector2 position = positions.get(i);
 		   
@@ -168,25 +165,25 @@ public class OpenglText implements IRenderable {
 		    data[b + 20] = tex_x;		data[b + 22] = realX;
 		    data[b + 21] = tex_y+h2;	data[b + 23] = realY;
 		    
-		    TextLength = (int)data[b + 12];
-		    TextHeight = h2;
+		    textLength = (int)data[b + 12];
+		    textHeight = h2;
 		    		    
 		    b += 24;
 		}
 		
-		if(Loaded) {
-			PositionBuffer.reinsert(data);
+		if(loaded) {
+			positionBuffer.reinsert(data);
 		} else {
-			PositionBuffer.insert(data);
-			Loaded = true;
+			positionBuffer.insert(data);
+			loaded = true;
 		}
 		
-		InitialTranslate.set(x, y);
-	    Translate.set(x, y); 
+		initialTranslate.set(x, y);
+	    translate.set(x, y);
 	}
 	
 	public boolean isVisible() {
-		if(Translate.getY() + TextHeight >= 0 && Translate.getY() <= 800) {
+		if(translate.getY() + textHeight >= 0 && translate.getY() <= 800) {
 			return true;
 		} return false;
 	}
@@ -200,78 +197,71 @@ public class OpenglText implements IRenderable {
 	
 	
 	public Vector2 getPosition() {
-		return Translate;
+		return translate;
 	}
 	
 	public void update(int spacing) {
 		this.matrix.pushIdentity();
-		this.matrix.translate(Translate.getX(), Translate.getY());
+		this.matrix.translate(translate.getX(), translate.getY());
 	}
-	
-	static int ProjectionID = 0;
-	static int PositionID = 0;
-	static int MatrixID = 0;
-	static int ColourID = 0;
 
-	/** */
 	public void translate(float x, float y) {
-		Translate.set(x, y);
+		translate.set(x, y);
 	}
 	
 	public void reset() {
 		matrix.pushIdentity();
-		matrix.translate(InitialTranslate.getX(), InitialTranslate.getY());
+		matrix.translate(initialTranslate.getX(), initialTranslate.getY());
 		
-		Translate.set(InitialTranslate);
+		translate.set(initialTranslate);
 		
 	}
 	
 	public Vector2 getTranslate() {
-		return Translate;
+		return translate;
 	}
 	
 	public int GetWidth() {
-		return TextLength;
+		return textLength;
 	}
 	
 	public int GetHeight() {
-		return TextHeight;
+		return textHeight;
 	}
 	
 	public void beginProgram() {
-		Shader.startProgram();
+		shader.startProgram();
 	
-		if(ProjectionID == 0 && PositionID == 0 && MatrixID == 0)
-		{
-			PositionID = Shader.getAttribute("position");		
-			ProjectionID = Shader.getUniform("Projection");
-			MatrixID = Shader.getUniform("ModelView");
-			ColourID = Shader.getUniform("Shade");
+		if(PROJECTION_ID == 0 && POSITION_ID == 0 && MATRIX_ID == 0) {
+            PROJECTION_ID = shader.getUniform("Projection");
+            POSITION_ID = shader.getAttribute("position");
+			MATRIX_ID = shader.getUniform("ModelView");
+			COLOUR_ID = shader.getUniform("Shade");
 		}
 		
-		glUniformMatrix4fv(ProjectionID, 1, false, matrix.getProjection(), 0);
+		glUniformMatrix4fv(PROJECTION_ID, 1, false, matrix.getProjection(), 0);
 	}
 	
 	public void startRender() {		
-		glBindTexture(GL_TEXTURE_2D, Sheet.textureGL_ID[0]);
+		glBindTexture(GL_TEXTURE_2D, sheet.textureGL_ID[0]);
 		
-		PositionBuffer.bindBuffer();
-		glVertexAttribPointer(PositionID, 4,  GL_FLOAT, false, 0, 0);
-		glEnableVertexAttribArray(PositionID);
+		positionBuffer.bindBuffer();
+		glVertexAttribPointer(POSITION_ID, 4,  GL_FLOAT, false, 0, 0);
+		glEnableVertexAttribArray(POSITION_ID);
 		
-		glUniformMatrix4fv(MatrixID, 1, false, matrix.getModelView(), 0);
-		glUniform4fv(ColourID, 1, colour, 0);
-		glDrawArrays(GL_TRIANGLES, 0, Count);
+		glUniformMatrix4fv(MATRIX_ID, 1, false, matrix.getModelView(), 0);
+		glUniform4fv(COLOUR_ID, 1, colour, 0);
+		glDrawArrays(GL_TRIANGLES, 0, count);
 	}
 	
 	public void endProgram() {
-		glDisableVertexAttribArray(PositionID);
-		Shader.endProgram();
+		glDisableVertexAttribArray(POSITION_ID);
+		shader.endProgram();
 	}
 
 	public void load(int x, int y, ArrayList<String> strings, ArrayList<Vector2> positions) {
-		Document document = Font.getDocument();
-		XmlReader parser = Font.getParser();
+		Document document = font.getDocument();
+		XmlReader parser = font.getParser();
 	
 		NodeList nodeList = document.getElementsByTagName("character");
 	
@@ -281,12 +271,12 @@ public class OpenglText implements IRenderable {
 		}
 		
 		float[] data = new float[24 * stringLength];
-		Count = stringLength * 6;
+		count = stringLength * 6;
 
-		TextHeight = 0;
-		TextLength = 0;
+		textHeight = 0;
+		textLength = 0;
 		
-		Sheet = OpenglTextureManager.get().getSprite(Font.getTextureFilename());
+		sheet = OpenglTextureManager.get().getSprite(font.getTextureFilename());
 	    int b = 0;
 		for(int i = 0; i < strings.size(); i++) {
 			char[] letters = strings.get(i).toCharArray();			
@@ -312,10 +302,10 @@ public class OpenglText implements IRenderable {
 			    int h2 = Integer.parseInt(parser.getValue(e, "height"));
 			    int w2 = Integer.parseInt(parser.getValue(e, "width"));
 			    		    
-			    float realX = (float)x2/Sheet.width;
-			    float realY = (float)y2/Sheet.height;
-			    float realW = (float)(x2 + w2)/Sheet.width;
-			    float realH = (float)(y2 + h2)/Sheet.height;			  
+			    float realX = (float)x2/ sheet.width;
+			    float realY = (float)y2/ sheet.height;
+			    float realW = (float)(x2 + w2)/ sheet.width;
+			    float realH = (float)(y2 + h2)/ sheet.height;
 			    
 			    data[b + 0] = tex_x;	 	data[b + 2] = realX;
 			    data[b + 1] = tex_y;	 	data[b + 3] = realH;
@@ -331,23 +321,23 @@ public class OpenglText implements IRenderable {
 			    data[b + 20] = tex_x;		data[b + 22] = realX;
 			    data[b + 21] = tex_y+h2;	data[b + 23] = realY;
 			    
-			    TextLength = (int)data[b + 12];
-			    TextHeight = h2;
+			    textLength = (int)data[b + 12];
+			    textHeight = h2;
 			    		
 			    tex_x += w2;
 			    b += 24;
 			}
 		}
 		
-		if(Loaded) {
-			PositionBuffer.reinsert(data);
+		if(loaded) {
+			positionBuffer.reinsert(data);
 		} else {
-			PositionBuffer.insert(data);
-			Loaded = true;
+			positionBuffer.insert(data);
+			loaded = true;
 		}
 		
-		InitialTranslate.set(x, y);
-	    Translate.set(x, y); 
+		initialTranslate.set(x, y);
+	    translate.set(x, y);
 	}
 
 	@Override

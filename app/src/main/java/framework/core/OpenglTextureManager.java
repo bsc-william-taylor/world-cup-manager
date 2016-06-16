@@ -7,22 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLUtils;
 
-/**
- * 
- * @author B0023_000
- *
- */
+
 public class OpenglTextureManager {
-	/** */
 	private static final int ARRAY_RESERVE_SIZE = 100;
-	/** **/
 	private static OpenglTextureManager instance;
-	/** */
 	private ArrayList<OpenglTextureUnit> textures;
-	
-	/**
-	 * 
-	 */
+
 	private OpenglTextureManager() {
 		textures = new ArrayList<OpenglTextureUnit>(ARRAY_RESERVE_SIZE);
 	}
@@ -32,12 +22,7 @@ public class OpenglTextureManager {
 			instance = new OpenglTextureManager();
 		} return instance;
 	}
-	
-	/**
-	 * 
-	 * @param TexName
-	 * @return
-	 */
+
 	public OpenglTextureUnit getSprite(String textureID) {
 		Integer size = textures.size();
 		for(int i = 0; i < size; i++) {
@@ -49,13 +34,7 @@ public class OpenglTextureManager {
 		
 		return null;
 	}
-	
-	/**
-	 * 
-	 * @param filename
-	 * @param name
-	 * @return
-	 */
+
 	public OpenglTextureUnit importTexture(String filename, String name) {
 		Integer duplicate = checkForDuplicate(name);
 		
@@ -84,10 +63,7 @@ public class OpenglTextureManager {
 			return textures.get(duplicate);
 		}
 	}
-	
-	/**
-	 * 
-	 */
+
 	public void releaseTextures() {
 		for(OpenglTextureUnit sprite : textures) {
 			glDeleteTextures(1, sprite.textureGL_ID, 0);
@@ -97,12 +73,7 @@ public class OpenglTextureManager {
 	public void clear() {
 		textures.clear();
 	}
-	
-	/**
-	 * 
-	 * @param name
-	 * @return
-	 */
+
 	private int checkForDuplicate(String name) {
 		int arraySize = textures.size();
 		int ID = -1;

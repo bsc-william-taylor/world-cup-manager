@@ -124,7 +124,7 @@ public class MenuScene extends Scene {
 	}
 	
 	/**
-	 * Update function that updates all objects
+	 * update function that updates all objects
 	 * in the scene
 	 */
 	@Override

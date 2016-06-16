@@ -11,51 +11,23 @@ import android.app.Application;
 import android.app.Activity;
 import android.os.Build;
 
-/**
- *  This class provides a simple interface
- *  to initialize the aegis framework for 
- *  the user. Users simply create a instance
- *  of this class in there main activity.
- * 
- * @version 28/01/2014
- * @author William Taylor
- */
-@SuppressWarnings("deprecation") @SuppressLint("NewApi")
+@SuppressWarnings("deprecation")
+@SuppressLint("NewApi")
 public class GameObject extends Application implements OnGestureListener {
-	/** A public access to the game activity */
 	public static Activity Activity;
-	
-	/** Games are designed to a certain screen size then scaled */
+
 	private final Integer SURFACE_HEIGHT = 800;
 	private final Integer SURFACE_WIDTH = 1280;
-	
-	/**	A class to detect flicks from the user */
-	private GestureDetectorCompat detector; 
-	 
-	/** Android activity variable for setting up states */
+	private GestureDetectorCompat detector;
 	private IGameActivity aegisActivity;
-	
-	/** OpenGL Renderer/Surface variable handles all graphic operations */
 	private GLSurfaceView renderingThread;
-	
-	/** Android Activity for getting info */
 	private Activity gameActivity;
-	
-	/** Scalar variables for transforming pointer touch positions */
+
 	private Float height = 1.0f;
 	private Float width = 1.0f;
-	
-	/** A variable that tells if the game is landscape or portrait */
 	private Boolean landscape;
-	
-	private static Boolean disable;
+    private static Boolean disable;
 
-	/**
-	 *	Starts the game and get all info from the android
-	 *	activity.
-	 *
-	 * @param activity Android activity variable
-	 */
 	public void start(IGameActivity activity) {
 		detector = new GestureDetectorCompat(getApplicationContext(), this);
 
@@ -63,8 +35,7 @@ public class GameObject extends Application implements OnGestureListener {
 		DisplayMetrics Window = new DisplayMetrics();
 		landscape = true;
 		disable = false;
-	
-		// Setup rendering thread
+
 		renderingThread = new GLSurfaceView(this);
 		renderingThread.setEGLContextClientVersion(2);
 		renderingThread.setRenderer(new OpenglRenderer());
@@ -74,8 +45,7 @@ public class GameObject extends Application implements OnGestureListener {
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			renderingThread.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
 		}
-		
-		// Set up 
+
 		gameActivity.getWindowManager().getDefaultDisplay().getMetrics(Window);		
 		gameActivity.setContentView(renderingThread);
 		
@@ -93,23 +63,11 @@ public class GameObject extends Application implements OnGestureListener {
 	public IFactory getFactory() {
 		return SceneManager.get().getFactory();
 	}
-	
-	/**
-	 * Function that helps stop the activity sending messages
-	 * to the framework before it has been set up.
-	 * 
-	 * @return boolean to indicate if the framework has loaded all components
-	 */
+
 	public Boolean hasInitialised() {
 		return SceneManager.get().hasLoaded();
 	}
-	
-	/**
-	 * Sets up the window/surface for draw by accessing
-	 * the default window from the Android activity.
-	 * 
-	 * @param activity Android activity to get window from.
-	 */
+
 	public void setupWindow(Activity activity) {		
 		gameActivity = activity;
 		gameActivity.requestWindowFeature(0x1);
@@ -117,13 +75,7 @@ public class GameObject extends Application implements OnGestureListener {
 		
 		Activity = activity;
 	}
-	
-	/**
-	 * Function handles the onTouch event activiated by the Android activity
-	 * and sends the relevant data to the current scene.
-	 * 
-	 * @param e Touch event variable which will be sent to the current scene.
-	 */
+
 	public boolean touchEvent(MotionEvent e) {
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			renderingThread.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
@@ -134,21 +86,17 @@ public class GameObject extends Application implements OnGestureListener {
 			
 			if(landscape && e != null) {
 				if((e != null) && (height != 0) && (width != 0)) {
-					// Set y(0) to the bottem left screen point.
 					int y = (int)((SURFACE_HEIGHT) - (e.getY() / height));
 					int x = (int)(e.getX() / width);
-					
-					// Pass transformed data to current scene.
+
 					SceneManager.get().getCurrent().onTouch(e, x, y);
 					return true;
 				}
 			} else {
 				if(height != 0 && width != 0) {
-					// Set y(0) to the bottem left screen point.
 					int y = (int)((SURFACE_HEIGHT) - (e.getY() / height));
 					int x = (int)(e.getX() / width);
-					
-					// Pass transformed data to current scene.
+
 					SceneManager.get().getCurrent().onTouch(e, x, y);
 					return true;
 				}
@@ -184,8 +132,7 @@ public class GameObject extends Application implements OnGestureListener {
 	public void onLongPress(MotionEvent e) {
 		int y = (int)((SURFACE_HEIGHT) - (e.getY() / height));
 		int x = (int)(e.getX() / width);
-		
-		// Pass transformed data to current scene.
+
 		SceneManager.get().getCurrent().onLongPress(e, x, y);
 	}
 

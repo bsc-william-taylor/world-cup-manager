@@ -36,7 +36,7 @@ public class OpenglShaderManager {
 		
 		if(!found) {
 			shader = new OpenglProgram();
-			shader.PushShaders(vs, fs);
+			shader.pushShaders(vs, fs);
 			programs.add(shader);
 		}
 		

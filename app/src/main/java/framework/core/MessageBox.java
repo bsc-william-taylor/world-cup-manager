@@ -3,51 +3,31 @@ package framework.core;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
-/**
- * 
- * @author William
- *
- */
 public class MessageBox {
-	/** **/
 	private IUiEvent onAcceptEvent;
-	/** **/
 	private IUiEvent onCancelEvent;
-	/** **/
-	private String message;
-	/** **/
-	private String title;
-	/** **/
-	private Boolean Yesno;
-	/** **/
+	private Boolean yesno;
 	private String positiveText;
-	/** */
 	private String negativeText;
-	
-	/**
-	 * 
-	 */
+	private String message;
+	private String title;
+
 	public MessageBox() {
 		positiveText = "Yes";
 		negativeText = "No";
 		message = "Yes/No ?";
 		title = "Title";
-		Yesno = false;
+		yesno = false;
 	}
-	
-	/**
-	 * 
-	 * @param okOnly
-	 */
+
 	public void show(Boolean okOnly) {
-		if(!okOnly && !Yesno) {
+		if(!okOnly && !yesno) {
 			GameObject.Activity.runOnUiThread(new Runnable() {
 		        public void run() {
 		        	new AlertDialog.Builder(GameObject.Activity)
 				    .setTitle(title)
 				    .setMessage(message)
 				    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-				      
 				    	public void onClick(DialogInterface dialog, int which) { 
 				        	if(onAcceptEvent != null) {
 				        		onAcceptEvent.onUiEvent();
@@ -58,7 +38,6 @@ public class MessageBox {
 				     })
 				     
 				    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-				      
 				    	public void onClick(DialogInterface dialog, int which) {
 				    		if(onCancelEvent != null) {
 				    			onCancelEvent.onUiEvent();
@@ -66,18 +45,16 @@ public class MessageBox {
 				    		
 				        	dialog.dismiss();
 				        }
-				    	
 				     }).show();
 		        }
 		    });
-		} else if(Yesno) {
+		} else if(yesno) {
 			GameObject.Activity.runOnUiThread(new Runnable() {
 		        public void run() {
 		        	new AlertDialog.Builder(GameObject.Activity)
 				    .setTitle(title)
 				    .setMessage(message)
 				    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-				      
 				    	public void onClick(DialogInterface dialog, int which) { 
 				        	if(onAcceptEvent != null) {
 				        		onAcceptEvent.onUiEvent();
@@ -88,7 +65,6 @@ public class MessageBox {
 				     })
 				     
 				    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-				      
 				    	public void onClick(DialogInterface dialog, int which) {
 				    		if(onCancelEvent != null) {
 				    			onCancelEvent.onUiEvent();
@@ -130,54 +106,29 @@ public class MessageBox {
 		    });
 		}
 	}
-	
-	/**
-	 * 
-	 * @param title
-	 * @return
-	 */
+
 	public MessageBox setTitle(String title) {
 		this.title = title;
 		return this;
 	}
-	
-	/**
-	 * 
-	 * @param e
-	 * @return
-	 */
+
 	public MessageBox onAccept(IUiEvent e) {
 		onAcceptEvent = e;
 		return this;
 	}
-	
-	/**
-	 * 
-	 * @param e
-	 * @return
-	 */
+
 	public MessageBox onCancel(IUiEvent e) {
 		onCancelEvent = e;
 		return this;
 	}
-	
-	/**
-	 * 
-	 * @param message
-	 * @return
-	 */
+
 	public MessageBox setMessage(String message) {
 		this.message = message;
 		return this;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public MessageBox EnableYesNo() {
-		this.Yesno = true;
+		this.yesno = true;
 		return this;
-		
 	}
 }

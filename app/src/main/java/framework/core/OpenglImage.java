@@ -2,67 +2,51 @@ package framework.core;
 
 import static android.opengl.GLES20.*;
 
-/**
- * 
- * @author B0023_000
- *
- */
 public class OpenglImage implements IRenderable {
-	/**	*/
-	private final String VS = "shaders/image_vs.glsl";
-	private final String FS = "shaders/image_fs.glsl";
-	
-	/**	*/
-	private OpenglTextureUnit Sprite;
-	private float[] Color = new float[4];
-	
-	/**	*/
+	private static final String VS = "shaders/image_vs.glsl";
+	private static final String FS = "shaders/image_fs.glsl";
+    private static int ProjectionID = 0;
+    private static int PositionID = 0;
+    private static int MatrixID = 0;
+    private static int ColorID = 0;
+
+	private OpenglBuffer buffer = new OpenglBuffer();
+	private OpenglTextureUnit sprite;
+    private OpenglProgram program;
+
 	private Vector2 realPosition = new Vector2();
 	private Vector2 translation = new Vector2();
 	private Vector2 position = new Vector2();
 	private Vector2 scale = new Vector2(1,1);
 	private Vector2 size = new Vector2();
-	
-	private OpenglBuffer buffer = new OpenglBuffer();
+
+    private float[] Color = new float[4];
 	private Matrix matrix = new Matrix();
-	
-	private OpenglProgram program;
 	private String filename;
-	
+
+    public OpenglImage() {
+        program = OpenglShaderManager.get().getShader(VS, FS);
+        setShade(1f, 1f, 1f, 1f);
+    }
+
 	public OpenglTextureUnit getSprite() {
-		return Sprite;
+		return sprite;
 	}
 	
 	public void setSprite(OpenglTextureUnit s) {
-		Sprite = s;
-	}
-	/**
-	 * 
-	 */
-	public OpenglImage() {
-		program = OpenglShaderManager.get().getShader(VS, FS);
-		
-		setShade(1f, 1f, 1f, 1f);
+		sprite = s;
 	}
 	
 	public String getFilename() {
 		return filename;
 	}
-	
-	/**
-	 * 
-	 */
+
 	public void reset() {
 		translation.set(0, 0);
 	}
-	
-	/**
-	 * 
-	 * @param filename
-	 * @param name
-	 */
+
 	public void load(String filename, String name) {
-		Sprite = OpenglTextureManager.get().importTexture(filename, name);
+		sprite = OpenglTextureManager.get().importTexture(filename, name);
 		this.filename = filename;
 	}
 	
@@ -75,15 +59,7 @@ public class OpenglImage implements IRenderable {
 			return true;
 		} return false;
 	}
-	
-	static int  ProjectionID = 0;
-	static int PositionID = 0;
-	static int MatrixID = 0;
-	static int ColorID = 0;
-	
-	/**
-	 * 
-	 */
+
 	@Override
 	public void render() {	
 		if(isVisible()) {
@@ -92,13 +68,7 @@ public class OpenglImage implements IRenderable {
 			endProgram();
 		}
 	}
-	
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param s
-	 */
+
 	public void translateTo(float x, float y, float s) {
 		Vector2 position = getPosition();
 		
@@ -121,54 +91,32 @@ public class OpenglImage implements IRenderable {
 			translation.setY(vec.getX() * s);
 		}
 	}
-	
-	
-	/**
-	 * 
-	 * @param angle
-	 */
+
 	public void update(int angle) {
 		matrix.pushIdentity();
 		matrix.translate(translation.getX(), translation.getY());
 		matrix.rotate(angle, position.getX() + (size.getX()/2), position.getY() + (size.getY()/2));
 		matrix.scale(scale.getX(), scale.getY());
 	}
-	
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param div
-	 */
+
 	public void shift(float x, float y, int div) {
 		if(x != 0.0f && y != 0.0f) {
 			translation.setX((int)(x - (position.getX() + translation.getX()))/div);
 			translation.setY((int)(y - (position.getY() + translation.getY()))/div);
 		}
 	}
-	
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 */
+
 	public void translate(float x, float y) {
 		translation.setX(x);
 		translation.setY(y);
 	}
-	
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 */
+
 	public void translateOnce(float x, float y) {
 		translation.set(0, 0);
 		translation.setX(x);
 		translation.setY(y);
 	}
-	
-	
+
 	public void setPosition(float x, float y, float w, float h, float t, float z, float b, float c) {
 		float[] pos = new float[16];	
 
@@ -182,8 +130,7 @@ public class OpenglImage implements IRenderable {
 		
 		buffer.insert(pos);
 	}
-	
-	/**	*/
+
 	public void setScale(float x, float y) {
 		scale.set(x, y);
 	}
@@ -196,7 +143,6 @@ public class OpenglImage implements IRenderable {
 	public void setPosition(float x, float y, float w, float h) {
 		setPosition(x, y, w, h, 0, 0, 1, 1);
 	}
-	
 
 	public Vector2 getPosition() {
 		realPosition.set(position);
@@ -234,7 +180,7 @@ public class OpenglImage implements IRenderable {
 	public void startRender() {
 		buffer.bindBuffer();
 		
-		glBindTexture(GL_TEXTURE_2D, Sprite.textureGL_ID[0]);
+		glBindTexture(GL_TEXTURE_2D, sprite.textureGL_ID[0]);
 		glVertexAttribPointer(PositionID, 4,  GL_FLOAT, false, 0, 0);
 		glUniformMatrix4fv(ProjectionID, 1, false, matrix.getProjection(), 0);
 		glUniformMatrix4fv(MatrixID, 1, false, matrix.getModelView(), 0);

@@ -157,7 +157,7 @@ public class MatchesObject implements IRenderable {
     }
 
     /**
-     * Reset all the assets in the scene
+     * reset all the assets in the scene
      */
     public void reset() {
         completeButton.reset();

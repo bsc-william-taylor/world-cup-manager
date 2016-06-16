@@ -9,72 +9,72 @@ import java.io.InputStreamReader;
 
 import android.util.Log;
 
-/**
- * 
- * @author B0023_000
- *
- */
 public class OpenglProgram {
-	/**	*/
-	private Integer VertexShader;
-	private Integer FragShader;
-	/**	*/
-	private Integer Program;
-	
-	/** */
-	private String VertexFilename;
-	private String FragFilename;
-	
-	/**
-	 * 
-	 */
+	private Integer vertexShader;
+	private Integer fragShader;
+	private Integer program;
+
+	private String vertexFilename;
+	private String fragFilename;
+
 	public OpenglProgram() {
-		VertexShader = glCreateShader(GL_VERTEX_SHADER);
-		FragShader = glCreateShader(GL_FRAGMENT_SHADER);
-		Program = glCreateProgram();
+		vertexShader = glCreateShader(GL_VERTEX_SHADER);
+		fragShader = glCreateShader(GL_FRAGMENT_SHADER);
+		program = glCreateProgram();
+	}
+
+	public void pushShaders(String VertexID, String FragID) {
+		vertexFilename = VertexID;
+		fragFilename = FragID;
+		
+		glShaderSource(vertexShader, loadShaderSource(VertexID));
+		glShaderSource(fragShader, loadShaderSource(FragID));
+		
+		glCompileShader(vertexShader);
+		glCompileShader(fragShader);
+		
+		debugInfo(vertexShader);
+		debugInfo(fragShader);
+		
+		glAttachShader(program, vertexShader);
+		glAttachShader(program, fragShader);
+		glLinkProgram(program);
+	}
+
+	public int getUniform(String name) {
+		return glGetUniformLocation(program, name);
+	}
+
+	public int getAttribute(String name) {
+		return glGetAttribLocation(program, name);
+	}
+
+	public void startProgram() {
+		glUseProgram(program);
+	}
+
+	public void endProgram() {
+		glUseProgram(0);
 	}
 	
-	/**
-	 * 
-	 * @param VertexID
-	 * @param FragID
-	 */
-	public void PushShaders(String VertexID, String FragID) {	
-		VertexFilename = VertexID;
-		FragFilename = FragID;
-		
-		glShaderSource(VertexShader, loadShaderSource(VertexID));
-		glShaderSource(FragShader, loadShaderSource(FragID));
-		
-		glCompileShader(VertexShader);		
-		glCompileShader(FragShader);
-		
-		debugInfo(VertexShader);
-		debugInfo(FragShader);
-		
-		glAttachShader(Program, VertexShader);
-		glAttachShader(Program, FragShader);
-		glLinkProgram(Program);
+	public String getVertexFilename() {
+		return vertexFilename;
 	}
 	
-	/**
-	 * 
-	 * @param shader
-	 */
+
+	public String getFragFilename() {
+		return fragFilename;
+	}
+
 	private void debugInfo(int shader) {
 		int[] compiled = new int[1];
-        glGetShaderiv(shader, GL_COMPILE_STATUS, compiled, 0);
- 
-        if(compiled[0] == 0) {
-            Log.e("Shader Error", glGetShaderInfoLog(shader));
-        }
+		glGetShaderiv(shader, GL_COMPILE_STATUS, compiled, 0);
+
+		if(compiled[0] == 0) {
+			Log.e("Shader Error", glGetShaderInfoLog(shader));
+		}
 	}
-	
-	/**
-	 * 
-	 * @param filename
-	 * @return
-	 */
+
 	private String loadShaderSource(String filename) {
 		InputStream inputStream = ResourceManager.get().getResource(filename);
 		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -95,34 +95,4 @@ public class OpenglProgram {
 
 		return stringBuilder.toString();
 	}
-	
-	/**	*/
-	public int getUniform(String name) {
-		return glGetUniformLocation(Program, name);
-	}
-	
-	/**	*/
-	public int getAttribute(String name) {
-		return glGetAttribLocation(Program, name);
-	}
-	
-	/**	*/
-	public void startProgram() {
-		glUseProgram(Program);
-	}
-	
-	/**	*/
-	public void endProgram() {
-		glUseProgram(0);
-	}
-	
-	public String getVertexFilename() {
-		return VertexFilename;
-	}
-	
-
-	public String getFragFilename() {
-		return FragFilename;
-	}
-	
 }

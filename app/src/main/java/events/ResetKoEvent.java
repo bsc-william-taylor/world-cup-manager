@@ -30,7 +30,7 @@ public class ResetKoEvent implements IEvent, IUiEvent {
 		MessageBox messageBox = new MessageBox();
 		messageBox.onAccept(this);
 		messageBox.setMessage("Would you like to reset the KO stage ?");
-		messageBox.setTitle("Reset Knockout Stage");
+		messageBox.setTitle("reset Knockout Stage");
 		messageBox.EnableYesNo();
 		messageBox.show(false);
 	}
