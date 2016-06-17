@@ -1,61 +1,17 @@
-/**
- * Copyright (c) 2014 - William Taylor <wi11berto@yahoo.co.uk>
- *
- *	This software is provided 'as-is', without any express or implied warranty. 
- *  In no event will the authors be held liable for any damages arising from 
- *  the use of this software. Permission is granted to anyone to use this 
- *  software for any purpose, including commercial applications, and to 
- *  alter it and redistribute it freely, subject to the following 
- *  restrictions:
- *
- *	1. The origin of this software must not be misrepresented; 
- *     you must not claim that you wrote the original software. 
- *	   If you use this software in a product, an acknowledgment 
- *     in the product documentation would be appreciated 
- *     but is not required.
- *
- *  2. Altered source versions must be plainly marked as such, 
- *     and must not be misrepresented as being the original 
- *     software.
- *  
- *  3. This notice may not be removed or altered 
- *     from any source distribution.
- *     
- */
 package objects;
 
-/**
- * This is just a simple object that takes
- * all the interaction logic from the globals
- * class and places it here
- */
 public class Tournament {
-	/** The number of groups in the tournment */
 	public static final Integer NUMBER_OF_GROUPS = 8;
-	
-	/** The range of letters for each group */
 	public enum Letter { 
 		A, B, C, D, E, F, G, H
 	}
-	
-	/** The ID of this particular group */
+
 	private Letter groupID;
-	/** An array of teams in that group */
 	private Team[] teams;
-	
-	/**
-	 * Constructor sets up the teams group by a
-	 * unique integer ID which represents a letter
-	 * in the Letter enum
-	 * @param gc a ID to the group character
-	 * @throws Exception throws exception if GC doesnt match a
-	 * expected ID number
-	 */
+
 	public Tournament(int gc) throws Exception {
-		// create team array
 		teams = new Team[4];
-		
-		// Aquire the group ID
+
 		switch(gc) {
 			case 0: groupID = Letter.A; break;
 			case 1: groupID = Letter.B; break;
@@ -66,23 +22,16 @@ public class Tournament {
 			case 6: groupID = Letter.G; break;
 			case 7: groupID = Letter.H; break;
 		}
-	
-		// Create the teams that make up the group
+
 		create();
 	}
-	
-	/**
-	 * reset function resets all the teams
-	 */
-	public void Reset() {
+
+	public void reset() {
 		for(Team team : teams) {
 			team.Reset();
 		}
 	}
-	
-	/** 
-	 * Returns the winner from the group
-	 */
+
 	public Team getWinner() {
 		Team winner = teams[0];
 			
@@ -92,8 +41,7 @@ public class Tournament {
 				winner = teams[i];
 			}
 		}
-		
-		// Check to see if there is a draw
+
 		for(int i = 0; i < 4; i++) {
 			if(teams[i].Points == winner.Points) {
 				if(teams[i].GoalDifference > winner.GoalDifference) {
@@ -105,14 +53,10 @@ public class Tournament {
 				}
 			}
 		}
-		 
-		// Return winner
+
 		return winner;
 	}
-	
-	/**
-	 * Returns the runner up in the group
-	 */
+
 	public Team getRunnerUp() {
 		String winner = getWinner().getName();
 		
@@ -137,8 +81,7 @@ public class Tournament {
 				runnerup = tempArray[i];
 			}
 		}
-		
-		// Check to see if there is a draw
+
 		for(int i = 0; i < 3; i++) {
 			if(tempArray[i].Points == runnerup.Points) {
 				if(tempArray[i].GoalDifference > runnerup.GoalDifference) {
@@ -153,34 +96,20 @@ public class Tournament {
 		
 		return runnerup;
 	}
-	
-	/**
-	 * returns a reference to the team in the array at point i
-	 */
+
 	public Team getTeam(int i) {
 		return teams[i];
 	}
-	
-	/**
-	 * returns the name of the team stored at point i
-	 */
+
 	public String getTeamName(int i) {
 		return teams[i].getName();
 	}
 
-	/**
-	 * returns the team array
-	 */
 	public Team[] getTeams() {
 		return teams;
 	}
-	
-	/**
-	 * Creates the teams that are in each group
-	 * @throws Exception
-	 */
-	private void create() throws Exception {		
-		// Each group has a set of teams
+
+	private void create() throws Exception {
 		switch(groupID) {
 			// Tournament A
 			case A: {
@@ -262,7 +191,6 @@ public class Tournament {
 				break;
 			}
 			
-			// throw an exception if we dont have a ID that matches
 			default:
 				throw new Exception("Error creating group");
 		}

@@ -59,7 +59,7 @@ public class Globals {
 			currentDay = 1;
 		    
 		    for(int i = 0; i < tournaments.length; i++) {
-		    	tournaments[i].Reset();
+		    	tournaments[i].reset();
 		    }
 		    
 		    return true;
