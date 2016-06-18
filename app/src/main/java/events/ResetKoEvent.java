@@ -42,7 +42,7 @@ public class ResetKoEvent implements IEvent, IUiEvent {
 
 	@Override
 	public void onUiEvent() {
-		if(Globals.get().ResetKoStage()) {
+		if(Globals.get().resetKoStage()) {
 			// reset states
 			KnockOutScene knockoutScene = (KnockOutScene) SceneManager.get().getScene(MainActivity.Scenes.KNOCK_OUT);
 			MatchesScene matchesScene = (MatchesScene) SceneManager.get().getScene(MainActivity.Scenes.MATCHES);

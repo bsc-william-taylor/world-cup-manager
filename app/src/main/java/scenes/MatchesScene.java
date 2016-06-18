@@ -431,7 +431,7 @@ public class MatchesScene extends Scene {
 					for(int i = 0; i < results.length; i++) {
 						MatchResult matchResult = matchResults.get(count);
 						
-						if(matchResult.MatchResultPrimaryID.compareToIgnoreCase(entrysID[i]) == 0 && (results[i].getText().compareToIgnoreCase(":") == 0 || matchResult.Changed)) {
+						if(matchResult.matchResultPrimaryID.compareToIgnoreCase(entrysID[i]) == 0 && (results[i].getText().compareToIgnoreCase(":") == 0 || matchResult.changed)) {
 							Float y = results[i].getPosition().getY();
 							
 							results[i].text(String.valueOf(matchResult.teamOneScore + " : ") + String.valueOf(matchResult.teamTwoScore));
@@ -440,11 +440,11 @@ public class MatchesScene extends Scene {
 							results[i].setInitialPosition(((int)(650 - results[i].getWidth()/2)), y);
 							results[i].update();
 							
-							matchResult.Changed = false;
+							matchResult.changed = false;
 							break;
 						}
 						
-						if(matchResult.MatchResultSecondaryID.compareToIgnoreCase(entrysID[i]) == 0 && (results[i].getText().compareToIgnoreCase(":") == 0 || matchResult.Changed)){
+						if(matchResult.matchResultSecondaryID.compareToIgnoreCase(entrysID[i]) == 0 && (results[i].getText().compareToIgnoreCase(":") == 0 || matchResult.changed)){
 							Float y = results[i].getPosition().getY();
 							
 							results[i].text(String.valueOf(matchResult.teamOneScore + " : ") + String.valueOf(matchResult.teamTwoScore));
@@ -453,7 +453,7 @@ public class MatchesScene extends Scene {
 							results[i].setInitialPosition(((int)(650 - results[i].getWidth()/2)), y);
 							results[i].update();
 							
-							matchResult.Changed = false;
+							matchResult.changed = false;
 							break;
 						}
 					}

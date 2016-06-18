@@ -70,7 +70,7 @@ public class KnockOutEvent implements IEvent, OnClickListener {
 					scoreTwo = result.teamTwoScore;
 					count = 1;
 					
-					if(!result.Reversed) {
+					if(!result.reversed) {
 						buttonTwo.addText(String.valueOf(scoreOne));
 						buttonOne.addText(String.valueOf(scoreTwo));
 					} else {

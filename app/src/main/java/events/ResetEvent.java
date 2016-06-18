@@ -43,7 +43,7 @@ public class ResetEvent implements IEvent, IUiEvent {
 		MatchesScene matchesScene = (MatchesScene)scenes.getScene(MainActivity.Scenes.MATCHES);
 		GroupScene groupScene = (GroupScene)scenes.getScene(MainActivity.Scenes.GROUP);
 
-		Globals.get().Reset();
+		Globals.get().reset();
 		
 		knockoutScene.Reset();
 		matchesScene.Reset();

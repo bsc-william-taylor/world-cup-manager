@@ -189,8 +189,8 @@ public class MatchEvent implements IEvent, OnClickListener {
 			mainteam.updateString(scoreTwo, scoreOne);
 			opponent.updateString(scoreOne, scoreTwo);
 			
-			mainteam.team.MatchesPlayed = 2;
-			opponent.team.MatchesPlayed = 2;
+			mainteam.team.matchesPlayed = 2;
+			opponent.team.matchesPlayed = 2;
 		} else {
 			
 			newScoreOne = randomScore();
@@ -204,8 +204,8 @@ public class MatchEvent implements IEvent, OnClickListener {
 			mainteam.updateString(newScoreTwo, newScoreOne, scoreTwo, scoreOne);
 			opponent.updateString(newScoreOne, newScoreTwo, scoreOne, scoreTwo);
 			
-			mainteam.team.MatchesPlayed = 2;
-			opponent.team.MatchesPlayed = 2;
+			mainteam.team.matchesPlayed = 2;
+			opponent.team.matchesPlayed = 2;
 			
 			waitingForInput = false;
 			scoreOne = newScoreOne;

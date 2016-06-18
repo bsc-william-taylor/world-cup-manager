@@ -132,19 +132,19 @@ public class GroupObject implements IRenderable {
         do {
             swaps = 0;
             for(int i = 0; i < teams.length - 1; i++) {
-                if(teams[i].team.Points < teams[i+1].team.Points) {
+                if(teams[i].team.points < teams[i+1].team.points) {
                     TeamObject tmp = teams[i];
                     teams[i] = teams[i+1];
                     teams[i+1] = tmp;
                     swaps++;
-                } else if(teams[i].team.Points == teams[i+1].team.Points && teams[i].team.GoalDifference < teams[i+1].team.GoalDifference) {
+                } else if(teams[i].team.points == teams[i+1].team.points && teams[i].team.goalDifference < teams[i+1].team.goalDifference) {
                     TeamObject tmp = teams[i];
                     teams[i] = teams[i+1];
                     teams[i+1] = tmp;
 
                     swaps++;
-                } else if(teams[i].team.Points == teams[i+1].team.Points && teams[i].team.GoalDifference == teams[i+1].team.GoalDifference) {
-                    if(teams[i].team.GoalsScored < teams[i+1].team.GoalsScored) {
+                } else if(teams[i].team.points == teams[i+1].team.points && teams[i].team.goalDifference == teams[i+1].team.goalDifference) {
+                    if(teams[i].team.goalsScoted < teams[i+1].team.goalsScoted) {
                         TeamObject tmp = teams[i];
                         teams[i] = teams[i+1];
                         teams[i+1] = tmp;

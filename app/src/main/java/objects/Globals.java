@@ -48,7 +48,7 @@ public class Globals {
 		instance = new Globals();
 	}
 
-	public Boolean Reset() {
+	public Boolean reset() {
 		if(!knockoutResult.isEmpty() || !matchResult.isEmpty()) {
 			knockoutResult.clear();
 			matchResult.clear();
@@ -68,17 +68,13 @@ public class Globals {
 		return false;
 	}
 
-	public Boolean ResetKoStage() {
+	public Boolean resetKoStage() {
 		if(!knockoutResult.isEmpty()) {
 			knockoutResult.clear();		    
 		    return true;
 		}
 
 		return false;
-	}
-
-	public Boolean helpEnabled() {
-		return help;
 	}
 
 	public void showHelp(boolean b) {
@@ -93,16 +89,6 @@ public class Globals {
 		return tournaments[i];
 	}
 
-	public int getTotalMatchesPlayed() {
-		Integer count = 0;
-		for(int i = 0; i < 4; i++) {
-			for(int z = 0; z < tournaments.length; z++) {
-				count += tournaments[z].getTeam(i).MatchesPlayed;
-			}
-		}
-		return count;
-	}
-
 	public void changeMatchResult(Integer s1, TeamObject t1, Integer s2, TeamObject t2) {
 		// get the vector size
 		Integer vecSize = matchResult.size();
@@ -113,7 +99,7 @@ public class Globals {
 			if(r.teamTwo.compareToIgnoreCase(t2.getName()) == 0 && r.teamOne.compareToIgnoreCase(t1.getName()) == 0) {
 				r.teamOneScore = s1;
 				r.teamTwoScore = s2;
-				r.Changed = true;
+				r.changed = true;
 			}
 		}
 	}
@@ -126,8 +112,8 @@ public class Globals {
 		}
 
 		MatchResult r = new MatchResult();
-		r.MatchResultSecondaryID = t1.getName() + " vs " + t2.getName();
-		r.MatchResultPrimaryID = t2.getName() + " vs " + t1.getName();
+		r.matchResultSecondaryID = t1.getName() + " vs " + t2.getName();
+		r.matchResultPrimaryID = t2.getName() + " vs " + t1.getName();
 		r.teamOneScore = s1;
 		r.teamTwoScore = s2;
 		r.teamTwo = t2.getName();
@@ -137,15 +123,15 @@ public class Globals {
 
 	public void addKnockOutResult(Integer s1, Integer s2, Team t1, Team t2, Integer t, Boolean r) {
 		MatchResult result = new MatchResult();
-		result.MatchResultSecondaryID = t1.getName() + " vs " + t2.getName();
-		result.MatchResultPrimaryID = t2.getName() + " vs " + t1.getName();
+		result.matchResultSecondaryID = t1.getName() + " vs " + t2.getName();
+		result.matchResultPrimaryID = t2.getName() + " vs " + t1.getName();
 		result.teamOneScore = s1;
 		result.teamTwoScore = s2;
 		result.teamOne = t1.getName();
 		result.teamTwo = t2.getName();
 		result.type = t;
-		result.Changed = false;
-		result.Reversed = r;
+		result.changed = false;
+		result.reversed = r;
 		knockoutResult.add(result);
 
 		if(s1 < s2) {
@@ -253,9 +239,9 @@ public class Globals {
 				for(int i = 0; i < matchResultCount; i++) {
 					MatchResult result = new MatchResult();
 
-					result.Changed = Boolean.parseBoolean(saveFile.ReadLine());
-					result.MatchResultPrimaryID = saveFile.ReadLine();
-					result.MatchResultSecondaryID = saveFile.ReadLine();
+					result.changed = Boolean.parseBoolean(saveFile.ReadLine());
+					result.matchResultPrimaryID = saveFile.ReadLine();
+					result.matchResultSecondaryID = saveFile.ReadLine();
 					result.teamOne = saveFile.ReadLine();
 					result.teamOneScore = Integer.parseInt(saveFile.ReadLine());
 					result.teamTwo = saveFile.ReadLine();
@@ -275,8 +261,8 @@ public class Globals {
 						}
 
 						if(first != -1 && second != -1) {
-							team[second].MatchesPlayed++;
-							team[first].MatchesPlayed++;
+							team[second].matchesPlayed++;
+							team[first].matchesPlayed++;
 						}
 					}
 				}
@@ -284,15 +270,15 @@ public class Globals {
 				Integer koResultCount =  Integer.parseInt(saveFile.ReadLine());
 				for(int i = 0; i < koResultCount; i++) {
 					MatchResult result = new MatchResult();
-					result.Changed = Boolean.parseBoolean(saveFile.ReadLine());
-					result.MatchResultPrimaryID = saveFile.ReadLine();
-					result.MatchResultSecondaryID = saveFile.ReadLine();
+					result.changed = Boolean.parseBoolean(saveFile.ReadLine());
+					result.matchResultPrimaryID = saveFile.ReadLine();
+					result.matchResultSecondaryID = saveFile.ReadLine();
 					result.teamOne = saveFile.ReadLine();
 					result.teamOneScore = Integer.parseInt(saveFile.ReadLine());
 					result.teamTwo = saveFile.ReadLine();
 					result.teamTwoScore = Integer.parseInt(saveFile.ReadLine());
 					result.type = Integer.parseInt(saveFile.ReadLine());
-					result.Reversed = Boolean.parseBoolean(saveFile.ReadLine());
+					result.reversed = Boolean.parseBoolean(saveFile.ReadLine());
 					knockoutResult.add(result);
 				}
 			}
@@ -321,9 +307,9 @@ public class Globals {
 
 		for(int i = 0; i < matchResult.size(); i++) {
 			MatchResult result = matchResult.get(i);
-			fileData.add(String.valueOf(result.Changed));
-			fileData.add(String.valueOf(result.MatchResultPrimaryID));
-			fileData.add(String.valueOf(result.MatchResultSecondaryID));
+			fileData.add(String.valueOf(result.changed));
+			fileData.add(String.valueOf(result.matchResultPrimaryID));
+			fileData.add(String.valueOf(result.matchResultSecondaryID));
 			fileData.add(String.valueOf(result.teamOne));
 			fileData.add(String.valueOf(result.teamOneScore));
 			fileData.add(String.valueOf(result.teamTwo));
@@ -336,15 +322,15 @@ public class Globals {
 		for(int i = 0; i < knockoutResult.size(); i++) {
 			MatchResult result = knockoutResult.get(i);
 			// copy the values into the file
-			fileData.add(String.valueOf(result.Changed));
-			fileData.add(String.valueOf(result.MatchResultPrimaryID));
-			fileData.add(String.valueOf(result.MatchResultSecondaryID));
+			fileData.add(String.valueOf(result.changed));
+			fileData.add(String.valueOf(result.matchResultPrimaryID));
+			fileData.add(String.valueOf(result.matchResultSecondaryID));
 			fileData.add(String.valueOf(result.teamOne));
 			fileData.add(String.valueOf(result.teamOneScore));
 			fileData.add(String.valueOf(result.teamTwo));
 			fileData.add(String.valueOf(result.teamTwoScore));
 			fileData.add(String.valueOf(result.type));
-			fileData.add(String.valueOf(result.Reversed));
+			fileData.add(String.valueOf(result.reversed));
 		}
 
 		saveFile.Write(fileData);
@@ -444,7 +430,7 @@ public class Globals {
 		return winner;
 	}
 	public Team getRunnerUp(String str) {
-		Team winner = null;
+		Team winner;
 
 		if(str.compareToIgnoreCase("A") == 0) {
 			winner = tournaments[0].getRunnerUp();

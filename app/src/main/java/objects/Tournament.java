@@ -28,7 +28,7 @@ public class Tournament {
 
 	public void reset() {
 		for(Team team : teams) {
-			team.Reset();
+			team.reset();
 		}
 	}
 
@@ -37,17 +37,17 @@ public class Tournament {
 			
 		// get team with most points
 		for(int i = 0; i < 4; i++) {
-			if(teams[i].Points > winner.Points) {
+			if(teams[i].points > winner.points) {
 				winner = teams[i];
 			}
 		}
 
 		for(int i = 0; i < 4; i++) {
-			if(teams[i].Points == winner.Points) {
-				if(teams[i].GoalDifference > winner.GoalDifference) {
+			if(teams[i].points == winner.points) {
+				if(teams[i].goalDifference > winner.goalDifference) {
 					winner = teams[i];
-				} else if(teams[i].GoalDifference == winner.GoalDifference) {
-					if(teams[i].GoalsScored > winner.GoalsScored) {
+				} else if(teams[i].goalDifference == winner.goalDifference) {
+					if(teams[i].goalsScoted > winner.goalsScoted) {
 						winner = teams[i];
 					}
 				}
@@ -77,17 +77,17 @@ public class Tournament {
 		
 		Team runnerup = tempArray[0];
 		for(int i = 0; i < 3; i++) {
-			if(tempArray[i].Points > runnerup.Points ) {
+			if(tempArray[i].points > runnerup.points) {
 				runnerup = tempArray[i];
 			}
 		}
 
 		for(int i = 0; i < 3; i++) {
-			if(tempArray[i].Points == runnerup.Points) {
-				if(tempArray[i].GoalDifference > runnerup.GoalDifference) {
+			if(tempArray[i].points == runnerup.points) {
+				if(tempArray[i].goalDifference > runnerup.goalDifference) {
 					runnerup = tempArray[i];
-				} else if(tempArray[i].GoalDifference == runnerup.GoalDifference) {
-					if(tempArray[i].GoalsScored > runnerup.GoalsScored) {
+				} else if(tempArray[i].goalDifference == runnerup.goalDifference) {
+					if(tempArray[i].goalsScoted > runnerup.goalsScoted) {
 						runnerup = tempArray[i];
 					}
 				}
@@ -190,7 +190,7 @@ public class Tournament {
 				
 				break;
 			}
-			
+
 			default:
 				throw new Exception("Error creating group");
 		}

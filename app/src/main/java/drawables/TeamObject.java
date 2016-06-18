@@ -60,27 +60,27 @@ public class TeamObject implements IRenderable {
 
     public void reset() {
         teamScore.reset();
-        team.MatchesPlayed--;
+        team.matchesPlayed--;
         updateStr = true;
     }
 
     public void setMatchesPlayed(int num) {
-        team.MatchesPlayed = num;
+        team.matchesPlayed = num;
     }
 
     public void update(Integer y) {
         if(updateStr) {
-            team.MatchesPlayed++;
+            team.matchesPlayed++;
 
             strings.clear();
-            strings.add(String.valueOf(team.MatchesPlayed));
-            strings.add(String.valueOf(team.MatchesWon));
-            strings.add(String.valueOf(team.MatchesDrawn));
-            strings.add(String.valueOf(team.MatchesLossed));
-            strings.add(String.valueOf(team.GoalsScored));
-            strings.add(String.valueOf(team.GoalsConceeded));
-            strings.add(String.valueOf(team.GoalDifference));
-            strings.add(String.valueOf(team.Points));
+            strings.add(String.valueOf(team.matchesPlayed));
+            strings.add(String.valueOf(team.matchesWon));
+            strings.add(String.valueOf(team.matchesDrawn));
+            strings.add(String.valueOf(team.matchesLost));
+            strings.add(String.valueOf(team.goalsScoted));
+            strings.add(String.valueOf(team.goalsConceded));
+            strings.add(String.valueOf(team.goalDifference));
+            strings.add(String.valueOf(team.points));
 
             teamScore.Load(start_x, start_y, strings, positions);
             updateStr = false;
