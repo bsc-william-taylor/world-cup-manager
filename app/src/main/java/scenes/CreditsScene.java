@@ -18,7 +18,6 @@ public class CreditsScene extends Scene {
 
 	@Override
 	public void onCreate(IFactory factory) {
-		// Create the inner classes and pass the factory reference
 		sceneBackground = new CreditBackground(factory);
 		sceneImages = new CreditImage(factory);
 		sceneText = new CreditText(factory);
@@ -80,43 +79,35 @@ public class CreditsScene extends Scene {
 
 		public CreditText(IFactory factory) {
 			Font font = Font.get("small");
-			
-			// Init all objects used here
+
 			background = new Image("sprites/gs.PNG");
 			background.setPosition(200, 200, 900, 300);
 			musicArtist = new Label(font);
 			programmer = new Label(font);
 			manager = new Label(font);
 			artist = new Label(font);
-		
-			// set the text to load
+
 			programmer.text(PROGRAMMING_BY);
 			musicArtist.text(MUSIC_BY);
 			manager.text(DESIGN_BY);
 			artist.text(ART_BY);
 
-			// load all text at the default position
 			musicArtist.load(0, 0);
 			programmer.load(0, 0);
 			manager.load(0, 0);
 			artist.load(0, 0);
-			
-			// & translate them to center at 550px
+
 			musicArtist.setInitialPosition(550 - musicArtist.getWidth()/2, 300);
 			programmer.setInitialPosition(550 - programmer.getWidth()/2, 350);
 			manager.setInitialPosition(550 - manager.getWidth()/2, 400);
 			artist.setInitialPosition(550 - artist.getWidth()/2, 250);
-			
-			// set the colour of the text to yellow
+
 			musicArtist.setColour(1f, 1f, 0f, 1f);
 			programmer.setColour(1f, 1f, 0f, 1f);
 			manager.setColour(1f, 1f, 0f, 1f);
 			artist.setColour(1f, 1f, 0f, 1f);
 		}
-		
-		/** This function adds all the text objects 
-		 * to the vector ready for scene animation
-		 *  */
+
 		public void add(ArrayList<Object> animationObject) {
 			animationObject.add(musicArtist);
 			animationObject.add(background);
@@ -125,9 +116,7 @@ public class CreditsScene extends Scene {
 			animationObject.add(artist);
 		}
 
-		/** Just your basic update function */
 		public void update() {
-			// upadte the positions of all objects
 			musicArtist.update();
 			background.update();
 			programmer.update();
@@ -147,13 +136,10 @@ public class CreditsScene extends Scene {
 	}
 	
 	private class CreditBackground implements IRenderable {
-		/** The header at the top which shows which state you will go to */
 		private Image headerBackground;
-		/** The background image for the scene */
 		private Image background;
 		
 		public CreditBackground(IFactory factory) {
-			// load and get the background from the factory class
 			headerBackground = new Image("sprites/credits.bmp");
 			headerBackground.setPosition(0, 750, 1280, 50);
 			background = factory.request("SplashBackground");
@@ -172,33 +158,27 @@ public class CreditsScene extends Scene {
 	}
 
 	private class CreditImage implements IRenderable {
-		/** All three logos for the people who built the application */
 		private Image logoThree;
 		private Image logoTwo;
 		private Image logoOne;
-		
-		/** You basic constructor just sets up the objects */
+
 		public CreditImage(IFactory factory) {
 			logoThree = new Image("sprites/bggame.bmp");
 			logoTwo = new Image("sprites/littlebox.bmp");
 			logoOne = new Image("sprites/ntgame.bmp");
-			
-			// & set the positions
+
 			logoThree.setPosition(800, 225, 150, 80);
 			logoTwo.setPosition(800, 310, 150, 80);
 			logoOne.setPosition(800, 395, 150, 80);
 		}
-		
-		/** same as seen in the SceneText add function */
+
 		public void add(ArrayList<Object> animationObjects) {
 			animationObjects.add(logoThree);
 			animationObjects.add(logoTwo);
 			animationObjects.add(logoOne);
 		}
-		
-		/** Just your basic update function */
+
 		public void update() {
-			// update the positions of all the objects
 			logoThree.update();
 			logoTwo.update();
 			logoOne.update();

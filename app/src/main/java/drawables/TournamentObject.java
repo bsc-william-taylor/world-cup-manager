@@ -9,7 +9,7 @@ import framework.core.*;
 
 import java.util.ArrayList;
 
-public class TournementObject implements IRenderable {
+public class TournamentObject implements IRenderable {
     private class TeamItem {
         public ClickEvent listener;
         public Button button;
@@ -30,7 +30,7 @@ public class TournementObject implements IRenderable {
     private Button winnerFooter;
     private Integer resultsPosted;
 
-    public TournementObject() {
+    public TournamentObject() {
         Font font = Font.get("tiny");
 
         winnerFooter = new Button(font);
