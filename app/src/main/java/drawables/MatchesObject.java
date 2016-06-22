@@ -16,7 +16,7 @@ public class MatchesObject implements IRenderable {
     private Image[] flags = new Image[NUMBER_OF_TEAMS];
     private String[] names;
 
-    private ClickEvent completedEvent;
+    //private ClickEvent completedEvent;
     private Button completeButton;
 
     public MatchesObject(GroupObject group) {
@@ -79,15 +79,12 @@ public class MatchesObject implements IRenderable {
                 default: number = 0; break;
             }
 
-
-            // Load images & button
             flags[i] = new Image("sprites/" + names[number] + ".bmp");
             flags[i].setPosition(x+5, (int) (y + 200), 50, 50);
 
             buttons[i] = new Button(font);
             buttons[i].setSprite("sprites/button.png", (int)(x + 60), y + 200, 50, 50);
 
-            // at certain points increment either x or y by a certain amount
             if(i == 7 || i == 9 || i == 11) {
                 y = (int) (group.getY() - 70.0F);
                 x += 240;
@@ -96,12 +93,10 @@ public class MatchesObject implements IRenderable {
             }
         }
 
-        // no setup the events for each match
         for(int i = 0; i < 6; i++) {
             int opponent = i;
             int team = i;
 
-            // work out which team is playing which
             switch(opponent){
                 case 1: opponent = 2; break;
                 case 3: opponent = 3; break;
@@ -110,7 +105,6 @@ public class MatchesObject implements IRenderable {
                 default: opponent = 0; break;
             }
 
-            // i know this isnt readable and will change
             switch(team){
                 case 0: team = 1; break;
                 case 1: team = 3; break;
@@ -122,7 +116,6 @@ public class MatchesObject implements IRenderable {
 
             Integer day = 3;
 
-            // eventually :)
             switch(i) {
                 case 0: day = 1; break;
                 case 1: day = 1; break;
@@ -132,7 +125,6 @@ public class MatchesObject implements IRenderable {
                 default: break;
             }
 
-            // Init and setup events and register them with the listeners
             event[i] = new MatchEvent(buttons[i], buttons[i+6], group.getTeam(team), group.getTeam(opponent), day);
             events[i+6] = new ClickEvent(buttons[i+6]);
             events[i+6].eventType(event[i]);
@@ -141,24 +133,16 @@ public class MatchesObject implements IRenderable {
         }
     }
 
-    /**
-     * Restart function that is called when the users resets the application
-     */
     public void restart() {
-        // reset events
         for(int i = 0; i < 6; i++) {
             event[i].Reset();
         }
 
-        // && hide all the previous text
         for(int i = 0; i < 12; i++) {
             buttons[i].hideText();
         }
     }
 
-    /**
-     * reset all the assets in the scene
-     */
     public void reset() {
         completeButton.reset();
         for(int i = 0; i < 12; i++) {
@@ -167,12 +151,6 @@ public class MatchesObject implements IRenderable {
         }
     }
 
-    /**
-     * on touch event which passes data to the listeners
-     * @param e the motion event
-     * @param x the location x of where the event took place
-     * @param y the location y of where the event took place
-     */
     public void onTouch(MotionEvent e, float x, float y) {
         if(e.getAction() == MotionEvent.ACTION_DOWN) {
             //completedEvent.OnTouch(e, x, y);
@@ -182,10 +160,6 @@ public class MatchesObject implements IRenderable {
         }
     }
 
-    /**
-     * Simply updates all the objects
-     * @param y
-     */
     public void update(Integer y) {
         for(int i = 0; i < 12; i++) {
             buttons[i].translate(0, y);
@@ -200,12 +174,6 @@ public class MatchesObject implements IRenderable {
     }
 
 
-    /**
-     * onLongPress handler which passes the event to the listeners
-     * @param e a reference to the event
-     * @param x the position_x of where it happened
-     * @param y the position_y of where it happened
-     */
     public void onLongPress(MotionEvent e, int x, int y) {
         if(e.getAction() == MotionEvent.ACTION_DOWN) {
             //completedEvent.onLongPress(e, x, y);
@@ -215,18 +183,11 @@ public class MatchesObject implements IRenderable {
         }
     }
 
-    /**
-     * onEnter function which adds the listeners
-     * to be tracked
-     */
     public void onEnter() {
         EventManager.get().addListeners(events);
         //EventManager.get().addListener(completedEvent);
     }
 
-    /**
-     * onExit function which removes the listeners
-     */
     public void onExit() {
         EventManager eventsMgr = EventManager.get();
         //eventsMgr.removeListener(completedEvent);
@@ -235,9 +196,6 @@ public class MatchesObject implements IRenderable {
         }
     }
 
-    /**
-     * get functions for this class
-     */
     public Button[] getButtons() {
         return this.buttons;
     }

@@ -5,46 +5,46 @@ import framework.core.*;
 
 
 public class TouchEvent {
-	private Random randomGenarator;
+    private Random randomGenarator;
 
-	private AudioClip kickSoundThree;
-	private AudioClip kickSoundTwo;
-	private AudioClip kickSoundOne;
+    private AudioClip kickSoundThree;
+    private AudioClip kickSoundTwo;
+    private AudioClip kickSoundOne;
 
-	public TouchEvent() {
-		initialiseSounds();
-	}
+    public TouchEvent() {
+        initialiseSounds();
+    }
 
-	public void Play() {
-		AudioClip soundToPlay = null;
-		
-		randomGenarator = new Random();
-		randomGenarator.setSeed(System.currentTimeMillis());
+    public void Play() {
+        AudioClip soundToPlay = null;
 
-		Integer pick = randomGenarator.nextInt(3);
-		
-		switch(pick) {
-			case 0: soundToPlay = kickSoundOne; break;
-			case 1: soundToPlay = kickSoundTwo; break;
-			case 2: soundToPlay = kickSoundThree; break;
-			
-			default: break;
-		}
+        randomGenarator = new Random();
+        randomGenarator.setSeed(System.currentTimeMillis());
 
-		if(soundToPlay != null) {
-			soundToPlay.setVolume(0.05F, 0.05F);			
-			soundToPlay.setLoop(false);
-			soundToPlay.play();
-		}
-	}
+        Integer pick = randomGenarator.nextInt(3);
 
-	private void initialiseSounds() {
-		kickSoundThree = new AudioClip(framework.core.R.raw.kickedfootball3);
-		kickSoundTwo = new AudioClip(framework.core.R.raw.kickedfootball2);
-		kickSoundOne = new AudioClip(framework.core.R.raw.kickedfootball1);
+        switch(pick) {
+            case 0: soundToPlay = kickSoundOne; break;
+            case 1: soundToPlay = kickSoundTwo; break;
+            case 2: soundToPlay = kickSoundThree; break;
 
-		kickSoundThree.alwaysOn();
-		kickSoundTwo.alwaysOn();
-		kickSoundOne.alwaysOn();
-	}
+            default: break;
+        }
+
+        if(soundToPlay != null) {
+            soundToPlay.setVolume(0.05F, 0.05F);
+            soundToPlay.setLoop(false);
+            soundToPlay.play();
+        }
+    }
+
+    private void initialiseSounds() {
+        kickSoundThree = new AudioClip(framework.core.R.raw.kickedfootball3);
+        kickSoundTwo = new AudioClip(framework.core.R.raw.kickedfootball2);
+        kickSoundOne = new AudioClip(framework.core.R.raw.kickedfootball1);
+
+        kickSoundThree.alwaysOn();
+        kickSoundTwo.alwaysOn();
+        kickSoundOne.alwaysOn();
+    }
 }

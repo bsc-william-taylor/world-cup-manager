@@ -10,58 +10,58 @@ import objects.Globals;
 import java.util.Timer;
 
 public class ResetEvent implements IEvent, IUiEvent {
-	private Button button;
+    private Button button;
 
-	public ResetEvent(Button button) {
-		this.button = button;
-	}
+    public ResetEvent(Button button) {
+        this.button = button;
+    }
 
-	@Override
-	public void onActivate(Object data) {
-		button.setTexture("sprites/fill.png");
+    @Override
+    public void onActivate(Object data) {
+        button.setTexture("sprites/fill.png");
 
-		new Timer().schedule(new TimerTask() {
-			@Override
-			public void run() {
-				button.setTexture("sprites/button2.png");
-			}
-		}, 250);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                button.setTexture("sprites/button2.png");
+            }
+        }, 250);
 
-		MessageBox messageBox = new MessageBox();
-		messageBox.onAccept(this);
-		messageBox.setMessage("Would you like to reset your progress ?");
-		messageBox.setTitle("reset Application");
-		messageBox.EnableYesNo();
-		messageBox.show(false);
-	}
+        MessageBox messageBox = new MessageBox();
+        messageBox.onAccept(this);
+        messageBox.setMessage("Would you like to reset your progress ?");
+        messageBox.setTitle("reset Application");
+        messageBox.EnableYesNo();
+        messageBox.show(false);
+    }
 
-	@Override
-	public void onUiEvent() {
-		SceneManager scenes = SceneManager.get();
+    @Override
+    public void onUiEvent() {
+        SceneManager scenes = SceneManager.get();
 
-		KnockOutScene knockoutScene = (KnockOutScene)scenes.getScene(MainActivity.Scenes.KNOCK_OUT);
-		MatchesScene matchesScene = (MatchesScene)scenes.getScene(MainActivity.Scenes.MATCHES);
-		GroupScene groupScene = (GroupScene)scenes.getScene(MainActivity.Scenes.GROUP);
+        KnockOutScene knockoutScene = (KnockOutScene)scenes.getScene(MainActivity.Scenes.KNOCK_OUT);
+        MatchesScene matchesScene = (MatchesScene)scenes.getScene(MainActivity.Scenes.MATCHES);
+        GroupScene groupScene = (GroupScene)scenes.getScene(MainActivity.Scenes.GROUP);
 
-		Globals.get().reset();
-		
-		knockoutScene.Reset();
-		matchesScene.Reset();
-		groupScene.Reset();
-		
-		PostMessage();
-	}
+        Globals.get().reset();
 
-	private void PostMessage() {
-		MessageBox messageBox = new MessageBox();
-		
-		messageBox.setMessage("All done, everything back to 0");
-		messageBox.setTitle("Got it!");
-		messageBox.show(true);
-	}
+        knockoutScene.Reset();
+        matchesScene.Reset();
+        groupScene.Reset();
 
-	@Override
-	public void update() {
-		;
-	}
+        PostMessage();
+    }
+
+    private void PostMessage() {
+        MessageBox messageBox = new MessageBox();
+
+        messageBox.setMessage("All done, everything back to 0");
+        messageBox.setTitle("Got it!");
+        messageBox.show(true);
+    }
+
+    @Override
+    public void update() {
+        ;
+    }
 }

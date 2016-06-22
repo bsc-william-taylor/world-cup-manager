@@ -1,24 +1,24 @@
 package objects;
 
 public class Match {
-	private String teamOne;
-	private String teamTwo;
+    private String teamOne;
+    private String teamTwo;
 
-	public Match() {
-		teamOne = "N/A";
-		teamTwo = "N/A";
-	}
+    public Match() {
+        teamOne = "N/A";
+        teamTwo = "N/A";
+    }
 
-	public void setTeams(String one, String two) {
-		teamOne = one;
-		teamTwo = two;
-	}
+    public void setTeams(String one, String two) {
+        teamOne = one;
+        teamTwo = two;
+    }
 
-	public String getTeamOne() {
-		return teamOne;
-	}
+    public String getTeamOne() {
+        return teamOne;
+    }
 
-	public String getTeamTwo() {
-		return teamTwo;
-	}
+    public String getTeamTwo() {
+        return teamTwo;
+    }
 }

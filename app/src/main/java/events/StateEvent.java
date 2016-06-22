@@ -7,53 +7,53 @@ import framework.core.*;
 
 
 public class StateEvent implements IEvent {
-	private Boolean goToNextScene;
-	private Button button;
-	private Integer stateID;
+    private Boolean goToNextScene;
+    private Button button;
+    private Integer stateID;
 
-	private Timer timerTwo;
-	private Timer timerOne;
+    private Timer timerTwo;
+    private Timer timerOne;
 
-	private class TextureChange extends TimerTask {
-		private final String filename = "sprites/button2.png";
-		
-		@Override
-		public void run() {
-			button.setTexture(filename);
-			timerOne.cancel();
-		}
-	}
+    private class TextureChange extends TimerTask {
+        private final String filename = "sprites/button2.png";
 
-	private class TimedStateChange extends TimerTask {
-		@Override
-		public void run() {
-			goToNextScene = true;
-			timerTwo.cancel();
-		}
-	}
+        @Override
+        public void run() {
+            button.setTexture(filename);
+            timerOne.cancel();
+        }
+    }
 
-	public StateEvent(Integer state, Button sprite) {
-		goToNextScene = false;
-		button = sprite;
-		stateID = state;
-	}
+    private class TimedStateChange extends TimerTask {
+        @Override
+        public void run() {
+            goToNextScene = true;
+            timerTwo.cancel();
+        }
+    }
 
-	@Override
-	public void update() {
-		if(goToNextScene) {
-			SceneManager.get().switchTo(stateID);
-			goToNextScene = false;
-		}
-	}
+    public StateEvent(Integer state, Button sprite) {
+        goToNextScene = false;
+        button = sprite;
+        stateID = state;
+    }
 
-	@Override
-	public void onActivate(Object data) {
-		button.setTexture("sprites/fill.png");
+    @Override
+    public void update() {
+        if(goToNextScene) {
+            SceneManager.get().switchTo(stateID);
+            goToNextScene = false;
+        }
+    }
 
-		timerOne = new Timer();
-		timerTwo = new Timer();
+    @Override
+    public void onActivate(Object data) {
+        button.setTexture("sprites/fill.png");
 
-		timerOne.schedule(new TextureChange(), 100);
-		timerTwo.schedule(new TimedStateChange(), 350);
-	}
+        timerOne = new Timer();
+        timerTwo = new Timer();
+
+        timerOne.schedule(new TextureChange(), 100);
+        timerTwo.schedule(new TimedStateChange(), 350);
+    }
 }

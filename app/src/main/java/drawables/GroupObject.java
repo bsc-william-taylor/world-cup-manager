@@ -77,12 +77,10 @@ public class GroupObject implements IRenderable {
 
     public String[] getTeamNames() {
         String[] names = new String[4];
-
         names[0] = tournament.getTeam(0).getName();
         names[1] = tournament.getTeam(1).getName();
         names[2] = tournament.getTeam(2).getName();
         names[3] = tournament.getTeam(3).getName();
-
         return names;
     }
 
@@ -123,12 +121,12 @@ public class GroupObject implements IRenderable {
     }
 
     private void sort() {
-        Integer swaps = 0;
         teams[0] = teamOne;
         teams[1] = teamTwo;
         teams[2] = teamThree;
         teams[3] = teamFour;
 
+        Integer swaps = 0;
         do {
             swaps = 0;
             for(int i = 0; i < teams.length - 1; i++) {
