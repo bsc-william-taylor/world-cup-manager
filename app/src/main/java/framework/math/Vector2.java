@@ -50,8 +50,8 @@ public class Vector2 {
 	}
 
 	public static float rotateTo(Vector2 position, Vector2 size) {
-		double distance_x = (position.getX() + (float)size.getX()/2) - 615;
-		double distance_y = 375 - (position.getY() + (float)size.getY()/2);
+		double distance_x = (position.getX() + size.getX() / 2) - 615;
+		double distance_y = 375 - (position.getY() + size.getY() / 2);
 		double angle = 0.0f;
 		
 		if(distance_x >= 0 && distance_y >= 0) {
