@@ -1,5 +1,12 @@
 package scenes;
 
+import framework.IFactory;
+import framework.IRenderable;
+import framework.graphics.Font;
+import framework.graphics.Image;
+import framework.graphics.Label;
+import framework.graphics.RenderQueue;
+import framework.math.Vector2;
 import scenes.SplashScene.HeaderButtons;
 import android.view.MotionEvent;
 import activity.MainActivity;

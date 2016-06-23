@@ -2,6 +2,9 @@ package framework.core;
 
 import android.view.MotionEvent;
 
+import framework.IFactory;
+import framework.graphics.RenderQueue;
+
 public abstract class Scene {
 	public void onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY){}
     public void onRender(RenderQueue renderList) {}

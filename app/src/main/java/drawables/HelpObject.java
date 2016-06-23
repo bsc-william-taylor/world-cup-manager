@@ -1,8 +1,15 @@
 package drawables;
 
 import android.view.MotionEvent;
+
+import framework.IEvent;
+import framework.IRenderable;
 import framework.core.*;
 import java.util.*;
+
+import framework.graphics.Button;
+import framework.graphics.Font;
+import framework.graphics.Image;
 import objects.Globals;
 
 public class HelpObject implements IRenderable {

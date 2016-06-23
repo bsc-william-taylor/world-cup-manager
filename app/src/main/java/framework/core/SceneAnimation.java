@@ -2,6 +2,14 @@ package framework.core;
 
 import java.util.*;
 
+import framework.graphics.Button;
+import framework.graphics.Image;
+import framework.graphics.Label;
+import framework.math.Vector2;
+import framework.opengl.OpenglImage;
+import framework.opengl.OpenglLine;
+import framework.opengl.OpenglText;
+
 public class SceneAnimation {
 	private ArrayList<OpenglLine> lines  = new ArrayList<OpenglLine>();
 	private ArrayList<Button> buttons = new ArrayList<Button>();

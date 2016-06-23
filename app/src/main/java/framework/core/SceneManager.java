@@ -2,6 +2,10 @@ package framework.core;
 
 import java.util.ArrayList;
 
+import framework.IFactory;
+import framework.ISceneLoader;
+import framework.graphics.RenderQueue;
+
 public class SceneManager {
 	private static SceneManager instance;
 	private ArrayList<Scene> scenes;

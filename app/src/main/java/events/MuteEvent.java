@@ -1,6 +1,8 @@
 package events;
 
-import framework.core.*;
+import framework.IEvent;
+import framework.audio.AudioClip;
+import framework.graphics.Button;
 
 public class MuteEvent implements IEvent {
     private static Button button;

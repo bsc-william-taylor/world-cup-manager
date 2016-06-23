@@ -2,6 +2,9 @@ package framework.core;
 
 import java.util.*;
 
+import framework.IContainer;
+import framework.IFactory;
+
 @SuppressWarnings("unchecked")
 public class Factory implements IFactory {
 	private TreeMap<String, Object> sharableAssets;

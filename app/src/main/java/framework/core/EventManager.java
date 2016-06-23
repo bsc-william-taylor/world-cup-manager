@@ -2,6 +2,10 @@ package framework.core;
 
 import java.util.*;
 
+import framework.IEvent;
+import framework.IEventListener;
+import framework.IEventManager;
+
 public class EventManager implements IEventManager {
 	public class QueueEvent {
 		IEvent Event;

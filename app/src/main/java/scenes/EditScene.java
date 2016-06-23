@@ -1,5 +1,13 @@
 package scenes;
 
+import framework.IEvent;
+import framework.IFactory;
+import framework.audio.AudioClip;
+import framework.graphics.Button;
+import framework.graphics.Font;
+import framework.graphics.Image;
+import framework.graphics.RenderQueue;
+import framework.math.Vector2;
 import scenes.SplashScene.HeaderButtons;
 import android.view.MotionEvent;
 import activity.MainActivity;

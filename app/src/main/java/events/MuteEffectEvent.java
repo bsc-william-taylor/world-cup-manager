@@ -1,7 +1,8 @@
 package events;
 
 import activity.MainActivity;
-import framework.core.*;
+import framework.IEvent;
+import framework.graphics.Button;
 
 public class MuteEffectEvent implements IEvent {
     private static Button button;

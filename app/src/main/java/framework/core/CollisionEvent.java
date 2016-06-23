@@ -1,5 +1,11 @@
 package framework.core;
 
+import framework.IEvent;
+import framework.IEventListener;
+import framework.IEventManager;
+import framework.math.Vector2;
+import framework.opengl.OpenglImage;
+
 public class CollisionEvent implements IEventListener {
 	public interface CollisionArray {
 		public void collisionID(Integer num);

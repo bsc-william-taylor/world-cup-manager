@@ -3,15 +3,21 @@ package framework.core;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import framework.IEvent;
+import framework.IEventListener;
+import framework.IEventManager;
+import framework.math.Vector2;
+import framework.opengl.OpenglImage;
+
 public class ClickEvent implements IEventListener {
 	private MotionEvent HoldEvent;
 	private MotionEvent Motion;
-	private framework.core.Button Button;
+	private framework.graphics.Button Button;
 	private IEvent Event;
 	private float x = 0;
 	private float y = 0;
 	
-	public ClickEvent(framework.core.Button button) {
+	public ClickEvent(framework.graphics.Button button) {
 		Button = button;
 	}
 	

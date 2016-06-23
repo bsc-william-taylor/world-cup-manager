@@ -2,6 +2,8 @@ package framework.core;
 
 import android.view.MotionEvent;
 
+import framework.IFactory;
+
 public abstract class SceneList {
 	public void onTouch(MotionEvent e, int x, int y) {}
 	public void onEnter() {}

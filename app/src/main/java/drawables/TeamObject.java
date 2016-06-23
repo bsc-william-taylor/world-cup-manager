@@ -1,6 +1,9 @@
 package drawables;
 
-import framework.core.*;
+import framework.IRenderable;
+import framework.graphics.Font;
+import framework.graphics.Label;
+import framework.math.Vector2;
 import objects.Tournament;
 import objects.Team;
 

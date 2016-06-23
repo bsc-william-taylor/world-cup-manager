@@ -1,6 +1,8 @@
 package events;
 
-import framework.core.*;
+import framework.IEvent;
+import framework.IUiEvent;
+import framework.dialogs.MessageBox;
 import objects.Globals;
 
 public class ExitEvent implements IEvent, IUiEvent {

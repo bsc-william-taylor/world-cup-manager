@@ -2,7 +2,12 @@ package scenes;
 
 import android.view.MotionEvent;
 import activity.MainActivity;
+import framework.IFactory;
 import framework.core.*;
+import framework.graphics.Font;
+import framework.graphics.Image;
+import framework.graphics.Label;
+import framework.graphics.RenderQueue;
 
 public class EntryScene extends Scene {
     private static final Integer TEXT_X = 525;

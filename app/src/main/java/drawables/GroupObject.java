@@ -1,9 +1,13 @@
 package drawables;
 
+import framework.IRenderable;
+import framework.graphics.Font;
+import framework.graphics.Image;
+import framework.graphics.Label;
+import framework.math.Vector2;
 import objects.Globals;
 import objects.Tournament;
 import java.util.ArrayList;
-import framework.core.*;
 
 public class GroupObject implements IRenderable {
     private static TeamObject[] teams  = new TeamObject[4];

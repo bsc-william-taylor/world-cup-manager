@@ -1,6 +1,10 @@
 package framework.core;
 
 
+import framework.IEvent;
+import framework.IUiEvent;
+import framework.dialogs.MessageBox;
+
 public class ExitEvent implements IEvent, IUiEvent {
 	@Override
 	public void onActivate(Object data) {

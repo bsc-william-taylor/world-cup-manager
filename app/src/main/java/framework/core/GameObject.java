@@ -11,6 +11,11 @@ import android.app.Application;
 import android.app.Activity;
 import android.os.Build;
 
+import framework.IFactory;
+import framework.IGameActivity;
+import framework.io.ResourceManager;
+import framework.opengl.OpenglRenderer;
+
 @SuppressWarnings("deprecation")
 @SuppressLint("NewApi")
 public class GameObject extends Application implements OnGestureListener {

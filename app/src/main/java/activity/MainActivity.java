@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import events.ExitEvent;
+import framework.IGameActivity;
+import framework.audio.AudioClip;
 import framework.core.*;
 import objects.Globals;
 import android.view.*;

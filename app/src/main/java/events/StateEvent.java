@@ -3,7 +3,9 @@ package events;
 import java.util.TimerTask;
 import java.util.Timer;
 
+import framework.IEvent;
 import framework.core.*;
+import framework.graphics.Button;
 
 
 public class StateEvent implements IEvent {

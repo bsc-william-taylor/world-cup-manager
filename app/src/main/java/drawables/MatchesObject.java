@@ -1,8 +1,13 @@
 package drawables;
 
 import android.view.MotionEvent;
+
+import framework.IRenderable;
 import framework.core.*;
 import events.*;
+import framework.graphics.Button;
+import framework.graphics.Font;
+import framework.graphics.Image;
 
 public class MatchesObject implements IRenderable {
     private final static Integer NUMBER_OF_TEAMS = 12;

@@ -1,8 +1,8 @@
 
 package objects;
 
-import framework.core.ResourceFile;
-import framework.core.MessageBox;
+import framework.io.ResourceFile;
+import framework.dialogs.MessageBox;
 
 import java.util.ArrayList;
 

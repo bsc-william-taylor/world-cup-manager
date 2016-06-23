@@ -1,7 +1,8 @@
 package events;
 
 import java.util.Random;
-import framework.core.*;
+
+import framework.audio.AudioClip;
 
 
 public class TouchEvent {

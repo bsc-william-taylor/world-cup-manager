@@ -5,9 +5,13 @@ import java.util.Random;
 
 import drawables.TeamObject;
 
+import framework.IEvent;
 import framework.core.*;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface;
+
+import framework.dialogs.MessageBox;
+import framework.graphics.Button;
 import objects.*;
 
 public class MatchEvent implements IEvent, OnClickListener {
