@@ -7,36 +7,30 @@ import framework.IEventListener;
 import framework.IEventManager;
 
 public class EventManager implements IEventManager {
-	public class QueueEvent {
-		IEvent Event;
-		Object Data;
-		Timer Timer;
-	}
+	private static EventManager instance;
+	private List<IEventListener> listeners;
 	
-	private ArrayList<IEventListener> Listeners;
-	private static EventManager Instance;
-	
-	public EventManager() {
-		Listeners = new ArrayList<IEventListener>();
+	private EventManager() {
+		listeners = new ArrayList<IEventListener>();
 	}
 	
 	public static EventManager get() {
-		if(Instance == null) {
-			Instance = new EventManager();
-		} return Instance;
+		if(instance == null) {
+			instance = new EventManager();
+		} return instance;
 	}
 
 	@Override
 	public void addListener(IEventListener event) {
-		Listeners.add(event);
+		listeners.add(event);
 	}
 
 	@Override
 	public void removeListener(IEventListener event) {
-		for(int i = 0; i < Listeners.size(); i++) {
-			IEventListener observer = Listeners.get(i);
+		for(int i = 0; i < listeners.size(); i++) {
+			IEventListener observer = listeners.get(i);
 			if(event.equals(observer)) {
-				Listeners.remove(i);
+				listeners.remove(i);
 			}
 		}
 	}
@@ -50,8 +44,8 @@ public class EventManager implements IEventManager {
 
 	@Override
 	public void update() {
-		for(int i = 0; i < Listeners.size(); i++) {
-			Listeners.get(i).check(this);
+		for(int i = 0; i < listeners.size(); i++) {
+			listeners.get(i).check(this);
 		}		
 	}
 

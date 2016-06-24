@@ -8,11 +8,11 @@ import framework.opengl.OpenglImage;
 
 public class CollisionEvent implements IEventListener {
 	public interface CollisionArray {
-		public void collisionID(Integer num);
+		void collisionID(Integer num);
 	}
 	
-	private OpenglImage Object;
-	private OpenglImage Obj;
+	private OpenglImage obj1;
+	private OpenglImage obj2;
 	private IEvent event;
 	private int Number;
 	
@@ -22,21 +22,21 @@ public class CollisionEvent implements IEventListener {
 	
 	public void surfaces(OpenglImage i, OpenglImage b, int num) {
 		Number = num;
-		Object = i;
-		Obj = b;
+		obj1 = i;
+		obj2 = b;
 	}
 	
 	public void surfaces(OpenglImage i, OpenglImage b) {
-		Object = i;
-		Obj = b;
+		obj1 = i;
+		obj2 = b;
 	}
 	
 	@Override
 	public void check(IEventManager manager) {
-		Vector2 posTwo = Object.getPosition();
-		Vector2 posOne = Obj.getPosition();
-		Vector2 szTwo = Object.getSize();
-		Vector2 szOne = Obj.getSize();
+		Vector2 posTwo = obj1.getPosition();
+		Vector2 posOne = obj2.getPosition();
+		Vector2 szTwo = obj1.getSize();
+		Vector2 szOne = obj2.getSize();
 		
 		float x2 = posTwo.getX();
 		float x1 = posOne.getX();
