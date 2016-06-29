@@ -9,7 +9,7 @@ import java.io.*;
 
 public class XmlReader {
     public Document getDocument(InputStream inputStream) {
-    	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         Document document = null;
 
         try {
@@ -19,9 +19,9 @@ public class XmlReader {
         } catch (ParserConfigurationException e) {
             Log.e(XmlReader.class.getName(), e.toString());
         } catch (SAXException e) {
-        	Log.e(XmlReader.class.getName(), e.toString());
+            Log.e(XmlReader.class.getName(), e.toString());
         } catch (IOException e) {
-        	Log.e(XmlReader.class.getName(), e.toString());
+            Log.e(XmlReader.class.getName(), e.toString());
         }
         
         return document;

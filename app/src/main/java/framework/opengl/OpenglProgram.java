@@ -12,89 +12,89 @@ import android.util.Log;
 import framework.io.ResourceManager;
 
 public class OpenglProgram {
-	private Integer vertexShader;
-	private Integer fragShader;
-	private Integer program;
+    private Integer vertexShader;
+    private Integer fragShader;
+    private Integer program;
 
-	private String vertexFilename;
-	private String fragFilename;
+    private String vertexFilename;
+    private String fragFilename;
 
-	public OpenglProgram() {
-		vertexShader = glCreateShader(GL_VERTEX_SHADER);
-		fragShader = glCreateShader(GL_FRAGMENT_SHADER);
-		program = glCreateProgram();
-	}
+    public OpenglProgram() {
+        vertexShader = glCreateShader(GL_VERTEX_SHADER);
+        fragShader = glCreateShader(GL_FRAGMENT_SHADER);
+        program = glCreateProgram();
+    }
 
-	public void pushShaders(String VertexID, String FragID) {
-		vertexFilename = VertexID;
-		fragFilename = FragID;
-		
-		glShaderSource(vertexShader, loadShaderSource(VertexID));
-		glShaderSource(fragShader, loadShaderSource(FragID));
-		
-		glCompileShader(vertexShader);
-		glCompileShader(fragShader);
-		
-		debugInfo(vertexShader);
-		debugInfo(fragShader);
-		
-		glAttachShader(program, vertexShader);
-		glAttachShader(program, fragShader);
-		glLinkProgram(program);
-	}
+    public void pushShaders(String VertexID, String FragID) {
+        vertexFilename = VertexID;
+        fragFilename = FragID;
 
-	public int getUniform(String name) {
-		return glGetUniformLocation(program, name);
-	}
+        glShaderSource(vertexShader, loadShaderSource(VertexID));
+        glShaderSource(fragShader, loadShaderSource(FragID));
 
-	public int getAttribute(String name) {
-		return glGetAttribLocation(program, name);
-	}
+        glCompileShader(vertexShader);
+        glCompileShader(fragShader);
 
-	public void startProgram() {
-		glUseProgram(program);
-	}
+        debugInfo(vertexShader);
+        debugInfo(fragShader);
 
-	public void endProgram() {
-		glUseProgram(0);
-	}
-	
-	public String getVertexFilename() {
-		return vertexFilename;
-	}
-	
+        glAttachShader(program, vertexShader);
+        glAttachShader(program, fragShader);
+        glLinkProgram(program);
+    }
 
-	public String getFragFilename() {
-		return fragFilename;
-	}
+    public int getUniform(String name) {
+        return glGetUniformLocation(program, name);
+    }
 
-	private void debugInfo(int shader) {
-		int[] compiled = new int[1];
-		glGetShaderiv(shader, GL_COMPILE_STATUS, compiled, 0);
+    public int getAttribute(String name) {
+        return glGetAttribLocation(program, name);
+    }
 
-		if(compiled[0] == 0) {
-			Log.e("Shader Error", glGetShaderInfoLog(shader));
-		}
-	}
+    public void startProgram() {
+        glUseProgram(program);
+    }
 
-	private String loadShaderSource(String filename) {
-		InputStream inputStream = ResourceManager.get().getResource(filename);
-		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+    public void endProgram() {
+        glUseProgram(0);
+    }
 
-		StringBuilder stringBuilder = new StringBuilder();
-		String string;
+    public String getVertexFilename() {
+        return vertexFilename;
+    }
 
-		try	{
-			while((string = bufferedReader.readLine()) != null)	{
-				stringBuilder.append(string);
-				stringBuilder.append('\n');
-			}
-		}
-		catch(IOException e) {
-			return null;
-		}
 
-		return stringBuilder.toString();
-	}
+    public String getFragFilename() {
+        return fragFilename;
+    }
+
+    private void debugInfo(int shader) {
+        int[] compiled = new int[1];
+        glGetShaderiv(shader, GL_COMPILE_STATUS, compiled, 0);
+
+        if(compiled[0] == 0) {
+            Log.e("Shader Error", glGetShaderInfoLog(shader));
+        }
+    }
+
+    private String loadShaderSource(String filename) {
+        InputStream inputStream = ResourceManager.get().getResource(filename);
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        String string;
+
+        try	{
+            while((string = bufferedReader.readLine()) != null)	{
+                stringBuilder.append(string);
+                stringBuilder.append('\n');
+            }
+        }
+        catch(IOException e) {
+            return null;
+        }
+
+        return stringBuilder.toString();
+    }
 }

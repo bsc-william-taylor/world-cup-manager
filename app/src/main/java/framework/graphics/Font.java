@@ -11,16 +11,16 @@ import framework.opengl.OpenglImage;
 
 public class Font {
     private static final int RESERVED_SPACE = 100;
-	private static ArrayList<Font> fonts = new ArrayList<Font>(RESERVED_SPACE);
+    private static ArrayList<Font> fonts = new ArrayList<Font>(RESERVED_SPACE);
 
-	private XmlReader xmlParser;
-	private InputStream stream;
-	private Document doc;
-	private OpenglImage sprite;
+    private XmlReader xmlParser;
+    private InputStream stream;
+    private Document doc;
+    private OpenglImage sprite;
     private String texture;
-	private String name;
+    private String name;
 
-	public Font(String xmlFile, String texture_filename, String font_name) {
+    public Font(String xmlFile, String texture_filename, String font_name) {
         boolean duplicateFound = false;
         for(Font e : fonts) {
             if(e.name.equalsIgnoreCase(name)) {
@@ -42,33 +42,33 @@ public class Font {
 
             fonts.add(this);
         }
-	}
+    }
 
-	public static Font get(String name) {
-		for(Font e : fonts) {
-			if(e.name.equalsIgnoreCase(name)) {
-				return e;
-			}
-		} return null;
-	}
+    public static Font get(String name) {
+        for(Font e : fonts) {
+            if(e.name.equalsIgnoreCase(name)) {
+                return e;
+            }
+        } return null;
+    }
 
-	public String getTextureFilename() {
-		return texture;
-	}
+    public String getTextureFilename() {
+        return texture;
+    }
 
-	public XmlReader getParser() {
-		return xmlParser;
-	}
+    public XmlReader getParser() {
+        return xmlParser;
+    }
 
-	public Document getDocument() {
-		return doc;
-	}
+    public Document getDocument() {
+        return doc;
+    }
 
-	public InputStream getStream() {
-		return stream;
-	}
+    public InputStream getStream() {
+        return stream;
+    }
 
-	public static void clear() {
-		fonts.clear();
-	}
+    public static void clear() {
+        fonts.clear();
+    }
 }

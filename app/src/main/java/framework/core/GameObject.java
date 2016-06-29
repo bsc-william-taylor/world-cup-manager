@@ -19,164 +19,164 @@ import framework.opengl.OpenglRenderer;
 @SuppressWarnings("deprecation")
 @SuppressLint("NewApi")
 public class GameObject extends Application implements OnGestureListener {
-	public static Activity Activity;
+    public static Activity Activity;
 
-	private final Integer SURFACE_HEIGHT = 800;
-	private final Integer SURFACE_WIDTH = 1280;
-	private GestureDetectorCompat detector;
-	private IGameActivity aegisActivity;
-	private GLSurfaceView renderingThread;
-	private Activity gameActivity;
+    private final Integer SURFACE_HEIGHT = 800;
+    private final Integer SURFACE_WIDTH = 1280;
+    private GestureDetectorCompat detector;
+    private IGameActivity aegisActivity;
+    private GLSurfaceView renderingThread;
+    private Activity gameActivity;
 
-	private Float height = 1.0f;
-	private Float width = 1.0f;
-	private Boolean landscape;
+    private Float height = 1.0f;
+    private Float width = 1.0f;
+    private Boolean landscape;
     private static Boolean disable;
 
-	public void start(IGameActivity activity) {
-		detector = new GestureDetectorCompat(getApplicationContext(), this);
+    public void start(IGameActivity activity) {
+        detector = new GestureDetectorCompat(getApplicationContext(), this);
 
-		ResourceManager.get().initialise(getApplicationContext());
-		DisplayMetrics Window = new DisplayMetrics();
-		landscape = true;
-		disable = false;
+        ResourceManager.get().initialise(getApplicationContext());
+        DisplayMetrics Window = new DisplayMetrics();
+        landscape = true;
+        disable = false;
 
-		renderingThread = new GLSurfaceView(this);
-		renderingThread.setEGLContextClientVersion(2);
-		renderingThread.setRenderer(new OpenglRenderer());
-		renderingThread.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
-		renderingThread.setPreserveEGLContextOnPause(true);
+        renderingThread = new GLSurfaceView(this);
+        renderingThread.setEGLContextClientVersion(2);
+        renderingThread.setRenderer(new OpenglRenderer());
+        renderingThread.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+        renderingThread.setPreserveEGLContextOnPause(true);
 
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			renderingThread.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
-		}
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            renderingThread.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
+        }
 
-		gameActivity.getWindowManager().getDefaultDisplay().getMetrics(Window);		
-		gameActivity.setContentView(renderingThread);
-		
-		height = (float)Window.heightPixels/SURFACE_HEIGHT;
-		width = (float)Window.widthPixels/SURFACE_WIDTH;
-		
-		aegisActivity = activity;
-		aegisActivity.setupStates(SceneManager.get());
-	}
-	
-	public void makePortrait() {
-		landscape = false;
-	}
-	
-	public IFactory getFactory() {
-		return SceneManager.get().getFactory();
-	}
+        gameActivity.getWindowManager().getDefaultDisplay().getMetrics(Window);
+        gameActivity.setContentView(renderingThread);
 
-	public Boolean hasInitialised() {
-		return SceneManager.get().hasLoaded();
-	}
+        height = (float)Window.heightPixels/SURFACE_HEIGHT;
+        width = (float)Window.widthPixels/SURFACE_WIDTH;
 
-	public void setupWindow(Activity activity) {		
-		gameActivity = activity;
-		gameActivity.requestWindowFeature(0x1);
-		gameActivity.getWindow().setFlags(0x400, 0x400);
-		
-		Activity = activity;
-	}
+        aegisActivity = activity;
+        aegisActivity.setupStates(SceneManager.get());
+    }
 
-	public boolean touchEvent(MotionEvent e) {
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			renderingThread.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
-		}
-		
- 		if(!disable) {
-			detector.onTouchEvent(e);
-			
-			if(landscape && e != null) {
-				if((e != null) && (height != 0) && (width != 0)) {
-					int y = (int)((SURFACE_HEIGHT) - (e.getY() / height));
-					int x = (int)(e.getX() / width);
+    public void makePortrait() {
+        landscape = false;
+    }
 
-					SceneManager.get().getCurrent().onTouch(e, x, y);
-					return true;
-				}
-			} else {
-				if(height != 0 && width != 0) {
-					int y = (int)((SURFACE_HEIGHT) - (e.getY() / height));
-					int x = (int)(e.getX() / width);
+    public IFactory getFactory() {
+        return SceneManager.get().getFactory();
+    }
 
-					SceneManager.get().getCurrent().onTouch(e, x, y);
-					return true;
-				}
-			}
- 		}
-		return true;
-	}
+    public Boolean hasInitialised() {
+        return SceneManager.get().hasLoaded();
+    }
 
-	
-	@Override
-	public boolean onDown(MotionEvent e) {
-		return true;
-	}
+    public void setupWindow(Activity activity) {
+        gameActivity = activity;
+        gameActivity.requestWindowFeature(0x1);
+        gameActivity.getWindow().setFlags(0x400, 0x400);
 
-	@Override
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			renderingThread.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
-		}
-		
-		Scene scene = SceneManager.get().getCurrent();
-	
-		if(velocityX*velocityX > velocityY*velocityY) {
-			scene.onFling(e1, e2, velocityX, 0);
-			return true;
-		} else {
-			scene.onFling(e1, e2, 0, velocityY);
-			return true;
-		}
-	}
+        Activity = activity;
+    }
 
-	@Override
-	public void onLongPress(MotionEvent e) {
-		int y = (int)((SURFACE_HEIGHT) - (e.getY() / height));
-		int x = (int)(e.getX() / width);
+    public boolean touchEvent(MotionEvent e) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            renderingThread.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
+        }
 
-		SceneManager.get().getCurrent().onLongPress(e, x, y);
-	}
+        if(!disable) {
+            detector.onTouchEvent(e);
 
-	@Override
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-		return false;
-	}
+            if(landscape && e != null) {
+                if((e != null) && (height != 0) && (width != 0)) {
+                    int y = (int)((SURFACE_HEIGHT) - (e.getY() / height));
+                    int x = (int)(e.getX() / width);
 
-	@Override
-	public void onShowPress(MotionEvent e) {
-		;
-	}
+                    SceneManager.get().getCurrent().onTouch(e, x, y);
+                    return true;
+                }
+            } else {
+                if(height != 0 && width != 0) {
+                    int y = (int)((SURFACE_HEIGHT) - (e.getY() / height));
+                    int x = (int)(e.getX() / width);
 
-	@Override
-	public boolean onSingleTapUp(MotionEvent e) {
-		return false;
-	}
+                    SceneManager.get().getCurrent().onTouch(e, x, y);
+                    return true;
+                }
+            }
+        }
+        return true;
+    }
 
-	public void onPause() {
-		renderingThread.onPause();
-		
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			renderingThread.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
-		}
-	}
 
-	public void onResume() {
-		renderingThread.onResume();
-		
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			renderingThread.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
-		}
-	}
-	
-	public static void enableInput() {
-		disable = false;
-	}
-	
-	public static void disableInput() {
-		disable = true;
-	}
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return true;
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            renderingThread.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
+        }
+
+        Scene scene = SceneManager.get().getCurrent();
+
+        if(velocityX*velocityX > velocityY*velocityY) {
+            scene.onFling(e1, e2, velocityX, 0);
+            return true;
+        } else {
+            scene.onFling(e1, e2, 0, velocityY);
+            return true;
+        }
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+        int y = (int)((SURFACE_HEIGHT) - (e.getY() / height));
+        int x = (int)(e.getX() / width);
+
+        SceneManager.get().getCurrent().onLongPress(e, x, y);
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+        ;
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    public void onPause() {
+        renderingThread.onPause();
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            renderingThread.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
+        }
+    }
+
+    public void onResume() {
+        renderingThread.onResume();
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            renderingThread.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
+        }
+    }
+
+    public static void enableInput() {
+        disable = false;
+    }
+
+    public static void disableInput() {
+        disable = true;
+    }
 }
