@@ -1,5 +1,6 @@
 package game.scenes;
 
+import android.util.Log;
 import android.view.MotionEvent;
 import game.activity.MainActivity;
 import framework.IFactory;
@@ -26,8 +27,8 @@ public class EntryScene extends Scene {
         text.update();
 
         background = factory.request("SplashBackground");
-        version = factory.request("version");
-        header = factory.request("header");
+        version = factory.request("Version");
+        header = factory.request("Header");
     }
 
     @Override
