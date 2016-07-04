@@ -1,5 +1,5 @@
 package framework;
 
 public interface IContainer {
-	void stackSubObjects(IFactory factory);
+    void stackSubObjects(IFactory factory);
 }

@@ -34,7 +34,7 @@ public class ResetEvent implements IEvent, IUiEvent {
         MessageBox messageBox = new MessageBox();
         messageBox.onAccept(this);
         messageBox.setMessage("Would you like to reset your progress ?");
-        messageBox.setTitle("reset Application");
+        messageBox.setTitle("Reset Application");
         messageBox.EnableYesNo();
         messageBox.show(false);
     }
