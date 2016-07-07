@@ -4,7 +4,7 @@ World Cup Manager was a simple world cup 2014 simulator that I built as part of 
 
 The app was written in Java and OpenGL ES with no native controls apart from the message boxes.
 
-![alt tag](https://lh3.ggpht.com/Ua2MOxdoPE4s73y-2RSCoiSteQP_5k58tGQyNOwWMBsDxktqFv9GdI8Jwon_PU3OVTg=h310)
+![alt tag](http://www.williamsamtaylor.co.uk/github-images/world-cup-manager.gif)
 
 ## Overview
 
