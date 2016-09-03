@@ -126,7 +126,7 @@ public class Tournament {
                 teams[0] = new Team("Spain");
                 teams[1] = new Team("Netherlands");
                 teams[2] = new Team("Chile");
-                teams[3] = new Team("Austalia");
+                teams[3] = new Team("Australia");
 
                 break;
             }
