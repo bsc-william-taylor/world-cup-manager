@@ -1,26 +1,25 @@
+
+<img src='preview.png' />
+
+<img src='icon.png' width='150' height='150' align='right' />
+
 ## World Cup Manager
 
-World Cup Manager was a simple world cup 2014 simulator that I built as part of a team for a module in university.
+World Cup Manager was a simple world cup 2014 simulator that I built as part of a team for a module in university. The app was written in Java and OpenGL ES with no native controls apart from the message boxes.
 
-The app was written in Java and OpenGL ES with no native controls apart from the message boxes.
+## Assignment
 
-![alt tag](http://www.williamsamtaylor.co.uk/github-images/world-cup-manager.gif)
+Expain assignment
 
-## Overview
+## Submission
 
-This project is just a simple implementation of constructor based dependency injection in C++. It’s small and lightweight and will be taken forward and improved as time progresses. Type information is captured in lambdas and then constructed and deallocated when new instances of this type are asked for from the container.
+Expain submission
 
-## Installation
+* Hardware accelerated graphics
+* Full tournament simulation
+* Swipe based gestures
+* Works on Android 2.2.3+
 
-You can get a copy with your normal clone command. Once you have done so you can open it up in Android Studio with no big issues.
+## License
 
-``` git clone https://github.com/william-taylor/world-cup-manager ```
-
-## Features
-- Hardware accelerated graphics
-- Full tournament simulation
-- Swipe based gestures
-- Works on Android 2.2.3+
-
-## Links
-[Google Play Store](https://play.google.com/store/apps/details?id=framework.core)
+Apache 2.0
