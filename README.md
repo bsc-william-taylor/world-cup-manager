@@ -17,7 +17,7 @@ The module assignment was actually just a design document and presentation. The 
 
 ## Submission
 
-In addition to submitting a lengthy and detailed design report we also submitted copies of the source code and APK which is the binary file standard for Android. A presentation was written to show off all work and design and this presentation also including a live demonstration of the Android application incase module lectures couldn't run the official version due to not having an Android device. We received a very high mark for the work as the team went the extra mile and actually implemented out idea and didnt just write about it.
+In addition to submitting a lengthy and detailed design report we also submitted copies of the source code and an APK which is the binary file standard for Android. A presentation was written to show off all work and design which included a live demonstration of the Android application incase module lectures couldn't run the official version due to not having an Android device. We received a very high mark for the work as the team went the extra mile and actually implemented our idea and didnt just write about it.
 
 **Android App Features**
 * Hardware accelerated graphics
